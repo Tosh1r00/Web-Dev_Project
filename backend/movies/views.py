@@ -25,7 +25,7 @@ def movie_detail(request, pk):
     serializer = MovieSerializer(movie)
     return Response(serializer.data)
 
-class GenreViewSet(APIView):
+class GenreListView(APIView):
     def get(self, request):
         genres = Genre.objects.all()
         serializer = GenreSerializer(genres, many=True)
