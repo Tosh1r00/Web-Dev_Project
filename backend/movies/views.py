@@ -3,8 +3,10 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .models import Movie, Genre
-from .serializers import MovieSerializer, GenreSerializer
+from rest_framework.permissions import IsAuthenticated
+from django.shortcuts import get_object_or_404
+from .models import Movie, Genre, Hall, Session, Booking
+from .serializers import MovieSerializer, GenreSerializer, HallSerializer, SessionSerializer, BookingSerializer
 
 @api_view(['GET', 'POST'])
 def movie_list(request):
@@ -83,3 +85,53 @@ class GenreDetailView(APIView):
             return Response({'error': 'Genre not found'}, status=status.HTTP_404_NOT_FOUND)
         genre.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+class SessionListView(APIView):
+    def get(self, request):
+        sessions = Session.objects.select_related('movie', 'hall').all()
+
+        movie_id = request.query_params.get('movie')
+        if movie_id:
+            sessions = sessions.filter(movie_id=movie_id)
+
+        date = request.query_params.get('date')
+        if date:
+            sessions = sessions.filter(start_time_date=date)
+        serializer = SessionSerializer(sessions, many=True)
+        return Response(serializer.data)
+
+    def post(self, request):
+        serializer = SessionSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class HallListCreateView(APIView):
+    def get(self, request):
+        halls = Hall.objects.all()
+        serializer = HallSerializer(halls, many=True)
+        return Response(serializer.data)
+
+    def post(self, request):
+        serializer = HallSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class BookingListCreateView(APIView):
+    permission_classes = [IsAuthenticated]
+    def get(self, request):
+        bookings = Booking.objects.filter(user=request.user)
+        serializer = BookingSerializer(bookings, many=True)
+        return Response(serializer.data)
+
+    def post(self, request):
+        data = request.data.copy()
+        data['user'] = request.user.id
+        serializer = BookingSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

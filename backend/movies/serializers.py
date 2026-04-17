@@ -27,20 +27,14 @@ class HallSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class SessionSerializer(serializers.ModelSerializer):
-    hall = HallSerializer(read_only=True)
-    movie = MovieSerializer(read_only=True)
-    hall_id = serializers.IntegerField(read_only=True)
-    movie_id = serializers.IntegerField(read_only=True)
-
     class Meta:
         model = Session
         fields = '__all__'
 
 class BookingSerializer(serializers.ModelSerializer):
-    session = SessionSerializer(read_only=True)
     user = serializers.StringRelatedField(read_only=True)
-    
+
     class Meta:
         model = Booking
-        fields = ['id', 'user', 'session', 'created_at', 'is_active']
-        read_only_fields = ['user', 'created_at']
+        fields = ['id', 'user', 'session', 'seats', 'created_at', 'is_active']
+        read_only_fields = ['user', 'created_at', 'is_active']

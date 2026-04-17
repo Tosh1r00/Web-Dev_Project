@@ -29,20 +29,20 @@ class Hall(models.Model):
         return self.name
 
 class Session(models.Model):
-    movie = models.ForeignKey(Movie, on_delete=models.CASCADE, related_name='sessions')
-    hall = models.ForeignKey(Hall, on_delete=models.CASCADE, related_name='sessions')
+    movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
+    hall = models.ForeignKey(Hall, on_delete=models.CASCADE)
     startTime = models.DateTimeField()
-    price = models.DecimalField(max_digits=10, decimal_places=2)
+    price = models.DecimalField(max_digits=8, decimal_places=2)
 
     def __str__(self):
-        return f"{self.movie} - {self.hall} - {self.startTime}"
+        return f"{self.movie} - {self.startTime}"
 
 class Booking(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='bookings')
-    session = models.ForeignKey(Session, on_delete=models.CASCADE, related_name='bookings')
-    seats = models.JSONField()
-    created = models.DateTimeField(auto_now_add=True)
+    user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
+    session = models.ForeignKey(Session, on_delete=models.CASCADE)
+    seats = models.TextField()
+    createdAt = models.DateTimeField(auto_now_add=True)
     isActive = models.BooleanField(default=True)
 
     def __str__(self):
-        return f"{self.user.username} - {self.session.movie.title} = {len(self.seats)} мест"
+        return f"{self.user.username} - {self.session.movie.title}"
