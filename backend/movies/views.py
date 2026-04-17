@@ -1,12 +1,16 @@
 from django.shortcuts import render
 from rest_framework import status
+from rest_framework import serializers
+from django.contrib.auth.models import User
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 from django.shortcuts import get_object_or_404
 from .models import Movie, Genre, Hall, Session, Booking
-from .serializers import MovieSerializer, GenreSerializer, HallSerializer, SessionSerializer, BookingSerializer
+from .serializers import MovieSerializer, GenreSerializer, HallSerializer, SessionSerializer, BookingSerializer, \
+    UserSerializer
+
 
 @api_view(['GET', 'POST'])
 def movie_list(request):
@@ -43,6 +47,14 @@ def movie_detail(request, pk):
     elif request.method == 'DELETE':
         movie.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+@api_view(['POST'])
+def register(request):
+    serializer = UserSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class GenreListView(APIView):
     def get(self, request):
@@ -135,3 +147,20 @@ class BookingListCreateView(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class SessionSeatsView(APIView):
+    def get(self, request, pk):
+        session = get_object_or_404(Session, pk=pk)
+        hall = session.hall
+        takenSeats = []
+        bookings = Booking.objects.filter(session=session, is_active=True)
+        for booking in bookings:
+            if booking.seats:
+                takenSeats.extend([s.strip() for s in booking.seats.split(',') if s.strip()])
+        data = {
+            'rows': hall.rows,
+            'seats_per_row': hall.seats_per_row,
+            'taken_seats': takenSeats,
+            'price': float(session.price),
+        }
+        return Response(data)
