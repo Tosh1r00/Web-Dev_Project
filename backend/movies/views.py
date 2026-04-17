@@ -96,7 +96,7 @@ class SessionListView(APIView):
 
         date = request.query_params.get('date')
         if date:
-            sessions = sessions.filter(start_time_date=date)
+            sessions = sessions.filter(start_time__date=date)
         serializer = SessionSerializer(sessions, many=True)
         return Response(serializer.data)
 
