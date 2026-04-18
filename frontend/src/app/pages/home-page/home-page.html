@@ -1,0 +1,34 @@
+<header>
+  <div class="logo">KBTU Ticket</div>
+  <div class="city-select"></div>
+  <button class="profile-brn">Войти</button>
+</header>
+<nav class="categories">
+  <a href="#">Кино</a>
+  <a href="#">Театры</a>
+  <a href="#">Концерты</a>
+  <a href="#">Стендап</a>
+  <a href="#">Музеи</a>
+  <a href="#">Детям</a>
+  <a href="#">Спорт</a>
+  <a href="#">Развлечения</a>
+  <a href="#">Мастер-классы</a>
+  <a href="#">Туры</a>
+  <a href="#">Цирковое Представление</a>
+  <a href="#">Бизнес Форумы</a>
+</nav>
+
+<main>
+  <h1>Афиша</h1>
+
+  <div class="movies-grid">
+    <div class="movie-card" *ngFor="let movie of movies">
+      <h3>{{movie.title}}</h3>
+      <p>{{movie.genre?.name}}</p>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <p>2026 KBTU Ticket</p>
+</footer>
