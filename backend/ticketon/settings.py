@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'movies',
     'users_login',
     'rest_framework',
+    'rest_framework_simplejwt'
 ]
 
 MIDDLEWARE = [
@@ -127,3 +128,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'users_login.User' #переопределяем логику пользователя
 # Password validation
+
+#говорим DRF что все защищённые endpoints проверяют JWT токен, а не сессии.
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+}
