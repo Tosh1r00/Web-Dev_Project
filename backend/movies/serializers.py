@@ -32,8 +32,6 @@ class SessionSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class BookingSerializer(serializers.ModelSerializer):
-    user = serializers.StringRelatedField(read_only=True)
-
     class Meta:
         model = Booking
         fields = ['id', 'user', 'session', 'seats', 'created_at', 'is_active']

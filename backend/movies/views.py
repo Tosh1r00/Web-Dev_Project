@@ -1,16 +1,11 @@
-from django.shortcuts import render
 from rest_framework import status
-from rest_framework import serializers
-from django.contrib.auth.models import User
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 from django.shortcuts import get_object_or_404
 from .models import Movie, Genre, Hall, Session, Booking
-from .serializers import MovieSerializer, GenreSerializer, HallSerializer, SessionSerializer, BookingSerializer, \
-    UserSerializer
-
+from .serializers import MovieSerializer, GenreSerializer, HallSerializer, SessionSerializer, BookingSerializer, UserSerializer
 
 @api_view(['GET', 'POST'])
 def movie_list(request):
@@ -152,15 +147,15 @@ class SessionSeatsView(APIView):
     def get(self, request, pk):
         session = get_object_or_404(Session, pk=pk)
         hall = session.hall
-        takenSeats = []
+        taken_seats = []
         bookings = Booking.objects.filter(session=session, is_active=True)
         for booking in bookings:
             if booking.seats:
-                takenSeats.extend([s.strip() for s in booking.seats.split(',') if s.strip()])
+                taken_seats.extend([s.strip() for s in booking.seats.split(',') if s.strip()])
         data = {
             'rows': hall.rows,
             'seats_per_row': hall.seats_per_row,
-            'taken_seats': takenSeats,
+            'taken_seats': taken_seats,
             'price': float(session.price),
         }
         return Response(data)
