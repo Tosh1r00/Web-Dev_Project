@@ -10,6 +10,7 @@ import { MovieService } from '../../services/movie.service';
   templateUrl: './main.html',
   styleUrl: './main.css',
 })
+
 export class Main implements OnInit {
   movies: any[] = [];
   filteredMovies: any[] = [];
