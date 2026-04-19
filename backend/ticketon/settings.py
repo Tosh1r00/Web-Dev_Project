@@ -151,9 +151,19 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'users_login.User' #переопределяем логику пользователя
 # Password validation
 
+
+
+
 #говорим DRF что все защищённые endpoints проверяют JWT токен, а не сессии.
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
+}
+
+#настраиваем TimeLive нашего токена для юзера
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes = 30), # 30минут жизни для ACCESS_TOKEN до обновления
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=7), #Сам по себе юзер(с токеном) живет 7дней
+    'ROTATE_REFRESH_TOKENS': True,
 }
