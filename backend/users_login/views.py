@@ -3,7 +3,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from django.contrib.auth import authenticate
 from rest_framework_simplejwt.tokens import RefreshToken
-from .serializers import RegistorSerializer, LoginSerializer
+from .serializers import RegisterSerializer, LoginSerializer
 
 # Регистрация - сериалайзером проверяем тру ли данные при вводе
 @api_view(['POST']) # проверяем запрос

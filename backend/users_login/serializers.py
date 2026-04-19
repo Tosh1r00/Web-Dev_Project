@@ -2,7 +2,7 @@ from rest_framework import serializers
 from .models import User
 
 #создаем нового пользователя
-class RegistorSerializer(serializers.ModelSerializer):
+class RegisterSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only = True) #не возвращаем пароль, только принимаем
 
     class Meta:
