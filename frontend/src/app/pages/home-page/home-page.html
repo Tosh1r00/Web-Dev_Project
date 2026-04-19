@@ -1,8 +1,20 @@
-<header>
-  <div class="logo">KBTU Ticket</div>
-  <div class="city-select"></div>
-  <button class="profile-brn">Войти</button>
+<header class="top-header">
+  <div class="header-left">
+    <div class="logo">KBTU Ticket</div>
+    <button type="button" class="ghost-btn">Астана</button>
+  </div>
+  <div class="header-search">
+    <button type="button" class="search-pill" aria-label="Поиск событий">
+      <span class="search-icon" aria-hidden="true">⌕</span>
+      <span class="search-placeholder">Поиск событий</span>
+    </button>
+  </div>
+  <div class="header-right">
+    <a routerLink="/my" class="ghost-btn">Мои билеты</a>
+    <button type="button" class="ghost-btn">Войти</button>
+  </div>
 </header>
+
 <nav class="categories">
   <a href="#">Кино</a>
   <a href="#">Театры</a>
@@ -21,12 +33,45 @@
 <main>
   <h1>Афиша</h1>
 
-  <div class="movies-grid">
-    <div class="movie-card" *ngFor="let movie of movies">
-      <h3>{{movie.title}}</h3>
-      <p>{{movie.genre?.name}}</p>
+  <section class="date-strip" aria-label="Выбор даты">
+    <div class="date-strip-inner">
+      @for (d of dateOptions; track d.id) {
+        <button type="button" class="date-chip" [class.date-chip-active]="d.active">
+          <span class="date-num">{{ d.day }}</span>
+          <span class="date-wd">{{ d.weekday }}</span>
+        </button>
+      }
     </div>
-  </div>
+  </section>
+
+  @for (sec of eventSections; track sec.id) {
+    <section class="event-section">
+      <div class="section-head">
+        <h2>{{ sec.title }}</h2>
+        <a class="section-link" href="#">Смотреть все</a>
+      </div>
+      <div class="card-scroller">
+        @for (ev of sec.items; track ev.id) {
+          <article class="event-card">
+            <div class="event-poster">
+              <img [src]="ev.posterUrl" [alt]="ev.title" />
+              <span class="age-badge">{{ ev.age }}</span>
+            </div>
+            <div class="event-body">
+              <h3 class="event-title">{{ ev.title }}</h3>
+              <p class="event-meta">{{ ev.dateLine }}</p>
+              @if (ev.venue) {
+                <p class="event-venue">{{ ev.venue }}</p>
+              }
+              <div class="event-prices">
+                <p class="price-base">{{ ev.priceBase }}</p>
+              </div>
+            </div>
+          </article>
+        }
+      </div>
+    </section>
+  }
 </main>
 
 <footer>

@@ -1,6 +1,5 @@
 from rest_framework import serializers
 from .models import Movie, Genre, Hall, Session, Booking
-from django.contrib.auth.models import User
 
 class GenreSerializer(serializers.Serializer):
     id = serializers.IntegerField(read_only=True)
@@ -36,13 +35,3 @@ class BookingSerializer(serializers.ModelSerializer):
         model = Booking
         fields = ['id', 'user', 'session', 'seats', 'created_at', 'is_active']
         read_only_fields = ['user', 'created_at', 'is_active']
-
-class UserSerializer(serializers.ModelSerializer):
-    password = serializers.CharField(write_only=True)
-    class Meta:
-        model = User
-        fields = ['id', 'username', 'email', 'password']
-
-    def create(self, validated_data):
-        user = User.objects.create_user(**validated_data)
-        return user
