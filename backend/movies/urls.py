@@ -10,5 +10,4 @@ urlpatterns = [
     path('sessions/', views.SessionListView.as_view()),
     path('bookings/', views.BookingListCreateView.as_view()),
     path('sessions/<int:pk>/seats/', views.SessionSeatsView.as_view()),
-    path('register/', views.register),
 ]
