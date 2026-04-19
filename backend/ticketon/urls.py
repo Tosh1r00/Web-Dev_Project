@@ -7,4 +7,5 @@ urlpatterns = [
     path('api/', include('movies.urls')),
     path('api/token/', TokenObtainPairView.as_view()),
     path('api/token/refresh/', TokenRefreshView.as_view()),
+    path('api/auth/', include('users_login.api.urls')), #login-reg page
 ]
