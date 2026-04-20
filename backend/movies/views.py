@@ -28,7 +28,7 @@ def movie_list(request):
     genre_id = request.query_params.get('genre') or request.query_params.get('genre_id')
     if genre_id:
         movies = movies.filter(genre_id=genre_id)
-    serializer = MovieSerializer(movies, many=True)
+    serializer = MovieSerializer(movies, many=True, context={'request': request})
     return Response(serializer.data)
 
 
@@ -36,10 +36,10 @@ def movie_list(request):
 def movie_detail(request, pk):
     movie = get_object_or_404(Movie, pk=pk)
     if request.method == 'GET':
-        serializer = MovieSerializer(movie)
+        serializer = MovieSerializer(movie, context={'request': request})
         return Response(serializer.data)
     if request.method == 'PUT':
-        serializer = MovieSerializer(movie, data=request.data)
+        serializer = MovieSerializer(movie, data=request.data, context={'request': request})
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
