@@ -6,7 +6,6 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { UserService, UserProfile, UpdateProfileRequest } from '../../services/user.service';
 import { BookingService, Booking } from '../../services/booking.service';
-import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-user-page',
@@ -40,7 +39,6 @@ export class UserPage implements OnInit, OnDestroy {
   constructor(
     private userSvc: UserService,
     private bookingSvc: BookingService,
-    private authSvc: AuthService,
     private router: Router,
   ) {}
 
@@ -107,7 +105,7 @@ export class UserPage implements OnInit, OnDestroy {
     });
   }
 
-  logout() { this.authSvc.logout(); this.router.navigate(['/login']); }
+  logout() { this.router.navigate(['/login']); }
 
   private showToast(msg: string) {
     this.toast = msg;
