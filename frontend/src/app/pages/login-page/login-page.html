@@ -17,7 +17,7 @@
                 <!-- Форма с инпутами и кнопкой отправить -->
                 <form (ngSubmit)="onSubmit()">
                     <!-- поле с ником только если REG процесс -->
-                    @if(isLogin) {
+                    @if(!isLogin) {
                         <div class="NICKNAME">
                             <!-- Инпут куда мы вешаем трекинг на поле ввода -->
                             <label>Nickname</label>
