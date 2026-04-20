@@ -3,8 +3,11 @@ from django.contrib.auth.models import AbstractUser #встроенная мод
 
 
 class User(AbstractUser):
-    email = models.EmailField(unique=True) #добавляем уникальный имейл для пользователя
+   student_id = models.CharField(max_length=20, unique=True) #добавляем уникальный StudentID (24.........) для пользователя
 
-    def __str__(self):
-        return self.username
+   USERNAME_FIELD = 'student_id' #логин идет по айдишке(на будущие постман запросы)
+   REQUIRED_FIELDS = ['username'] 
+
+   def __str__(self):
+    return self.username
     
