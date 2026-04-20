@@ -7,17 +7,17 @@ class RegisterSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ['username' , 'email' , 'password']
+        fields = ['username' , 'student_id' , 'password'] #поля сериализации
 
     def create(self, validated_data):
         user = User.objects.create_user(
             username=validated_data['username'],
-            email=validated_data['email'],
+            student_id=validated_data['student_id'],
             password=validated_data['password'],
     )
         return user 
         
 #для авторизованных пользователей просто принимаем вводные
 class LoginSerializer(serializers.Serializer):
-    username = serializers.CharField()
+    student_id = serializers.CharField() #поменяли логин ник на логин айди
     password = serializers.CharField(write_only=True)
