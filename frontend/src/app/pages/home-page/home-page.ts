@@ -196,7 +196,7 @@ export class HomePage implements OnInit, OnDestroy {
       error: (error: HttpErrorResponse) => {
         this.isBooking = false;
         if (error.status === 401) {
-          this.bookingMessage = 'Для бронирования нужна авторизация (это часть напарников).';
+          this.bookingMessage = 'Чтобы забронировать места, нужно войти или зарегистрироваться.';
           return;
         }
         this.handleApiError(error, 'Не удалось отправить бронь.');
