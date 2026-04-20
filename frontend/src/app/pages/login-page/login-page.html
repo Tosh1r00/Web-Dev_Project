@@ -1,1 +1,52 @@
-<p>login-page works!</p>
+<div class="login">
+    <div class="modal-window">
+        <!-- блок с кодом для текстовой части -->
+            <div class="left-side">
+                <div class="logo"><img src="frontend/src/app/all_need_images/ChatGPT Image 19 апр. 2026 г., 21_47_10.png" alt=""></div>
+                <h1>KBTU Ticket</h1>
+                <p>KBTU Ticket - платформа, разработанная студентами КБТУ. Ты можешь легко и быстро забронировать билеты на лучшие фильмы в Алматы. Наш сервис предоставляет удобный и быстрый способ выбора сеанса, с возможностью выбора удобных мест в зале. </p>
+            </div>
+
+            <!-- Делим текст от логики-->
+             <div class="divider"></div>
+
+            <!--Блок логики-->
+            <div class="right-side">
+                <h1 class="HelloMessage"> {{ isLogin ? 'Пожалуйста Авторизуйтесь' : 'Пожалуйста Зарегистрируйтесь' }}</h1>
+
+                <!-- Форма с инпутами и кнопкой отправить -->
+                <form (ngSubmit)="onSubmit()">
+                    <!-- поле с ником только если REG процесс -->
+                    @if(isLogin) {
+                        <div class="NICKNAME">
+                            <!-- Инпут куда мы вешаем трекинг на поле ввода -->
+                            <label>Nickname</label>
+                            <input type="text" [(ngModel)]="username" name="username" placeholder="Введи никнейм: "/>
+                        </div>
+                    }
+
+                    <div class="studentID">
+                         <label>KBTU StudentID</label>
+                         <input type="text" [(ngModel)]="student_id" name="student_id" placeholder="Введи KBTU_ID"/>
+                    </div>
+
+                    <div class="password">
+                         <label>Password</label>
+                         <input type="text" [(ngModel)]="password" name="password" placeholder="Введи пароль: "/>
+                    </div>
+
+                    <button type="submit"> {{ isLogin ? 'Войти' : 'Зарегистрироваться' }} </button>
+
+                    <!-- Выводить сообщение с ошибкой если есть -->
+                    @if (errorMessage) { <p class="error">{{ errorMessage }}</p> }
+                </form>
+
+                <p class="changeMode">
+                    {{isLogin ? 'Создать аккаунт?' : 'Войти в аккаунт?'}}
+                    <span (click)="changeMode()">
+                        {{isLogin ? 'Зарегестрироваться' : 'Войти'}}
+                    </span>
+                </p>
+            </div>
+    </div>
+</div>
