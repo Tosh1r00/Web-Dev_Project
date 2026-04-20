@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MovieService, Genre, Movie, Session, SeatMapResponse } from '../../services/movie.service';
@@ -34,7 +34,10 @@ export class HomePage implements OnInit, OnDestroy {
   bookingMessage = '';
   private searchTimer: ReturnType<typeof setTimeout> | null = null;
 
-  constructor(private movieService: MovieService) {}
+  constructor(
+    private movieService: MovieService,
+    private cdr: ChangeDetectorRef,
+  ) {}
 
   ngOnInit(): void {
     this.loadGenres();
@@ -57,10 +60,12 @@ export class HomePage implements OnInit, OnDestroy {
           this.movies = movies;
           this.applyClientFilters();
           this.isLoadingMovies = false;
+          this.cdr.detectChanges();
         },
         error: (error: HttpErrorResponse) => {
           this.isLoadingMovies = false;
           this.handleApiError(error, 'Не удалось загрузить список фильмов.');
+          this.cdr.detectChanges();
         },
       });
   }
@@ -69,9 +74,11 @@ export class HomePage implements OnInit, OnDestroy {
     this.movieService.getGenres().subscribe({
       next: (genres) => {
         this.genres = genres;
+        this.cdr.detectChanges();
       },
       error: (error: HttpErrorResponse) => {
         this.handleApiError(error, 'Не удалось загрузить жанры.');
+        this.cdr.detectChanges();
       },
     });
   }
