@@ -1,142 +1,188 @@
-/* Контейнер на весь экран */
+/* Основной контейнер страницы (светло-серый фон как в примере) */
+body {
+    margin: 0;
+}
 .login {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
     display: flex;
-    align-items: center;
     justify-content: center;
-    z-index: 1000;
-    /* Затемнение фона и блюр */
-    background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(8px);
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    font-family: 'Poppins', 'Segoe UI', Roboto, sans-serif;
+    background: linear-gradient(rgba(255, 251, 251, 0.4), rgba(0,0,0,0.4)),
+                url('/Login_BG.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
-
-/* Модальное окно (70% от экрана) */
+/* Белая карточка (modal-window) с тенью */
 .modal-window {
-    width: 70%;
-    height: 70%;
-    min-height: 500px;
-    background: white;
     display: flex;
-    border-radius: 20px;
+    width: 950px;
+    height: 600px;
+    background: #ffffff;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5); /* Мягкая тень */
+    border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
 }
 
-/* Левая сторона с градиентом */
+/* ЛЕВЫЙ БЛОК: Синий с волнами */
 .left-side {
     flex: 1;
-    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); /* Светло-синий к темно-синему */
-    padding: 40px;
+    background: linear-gradient(135deg, #4da3ff 0%, #000080 100%);
+    padding: 60px 40px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    color: white;
+    /* ИСПРАВЛЕНИЕ: Центрируем всё содержимое по вертикали и горизонтали */
+    justify-content: center; 
+    align-items: center;
+    text-align: center;
+    
+    color: #ffffff;
+    position: relative;
+    box-sizing: border-box;
 }
 
-.left-side h1 {
-    font-size: 2.5rem;
+/* Добавляем декоративные волны (через pseudo-element) */
+.left-side::after {
+    content: '';
+    position: absolute;
+    bottom: -50px;
+    left: 0;
+    width: 100%;
+    height: 150px;
+    /* Стилизация волны (SVG или CSS) */
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff20" fill-opacity="1" d="M0,224L48,202.7C96,181,192,139,288,128C384,117,480,139,576,144C672,149,768,139,864,133.3C960,128,1056,128,1152,117.3C1248,107,1344,85,1392,74.7L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+    background-size: cover;
+    opacity: 0.5;
+}
+
+.left-side .logo img {
+    max-width: 140px;
     margin-bottom: 20px;
 }
 
-.left-side p {
-    line-height: 1.6;
-    font-size: 1.1rem;
-    opacity: 0.9;
+.left-side h1 {
+    font-size: 2.8rem;
+    font-weight: 800;
+    margin: 0 0 15px 0;
+    color: #ffffff;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.18)
 }
 
-/* Правая сторона (Белая) */
+.left-side p {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.9);
+    margin: 0;
+    padding: 10px 0; 
+    max-width: 90%;
+}
+/* ПРАВЫЙ БЛОК: Чистая форма (светлая тема) */
 .right-side {
-    flex: 1;
-    padding: 40px;
-    background: #ffffff;
+    flex: 1.1;
+    padding: 60px 50px;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
+    background-color: #ffffff;
+    box-sizing: border-box;
 }
 
 .HelloMessage {
-    color: #333;
-    margin-bottom: 30px;
-    font-size: 1.8rem;
-    text-align: center;
+    width: 100%;
+    max-width: 380px;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #2c3e50;
+    margin: 0 0 35px 0;
+    text-align: left; /* Как в примере, выравнивание по левому краю внутри блока */
 }
 
 /* Форма и инпуты */
 form {
+    width: 100%;
+    max-width: 380px; /* Фиксируем ширину формы */
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
 
 .NICKNAME, .studentID, .password {
+    width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 8px;
 }
 
 label {
-    font-weight: 600;
-    color: #666;
     font-size: 0.9rem;
+    color: #7f8c8d; /* Серый цвет для подписей */
+    margin-bottom: 8px;
+    text-align: left;
 }
 
 input {
-    padding: 12px 15px;
-    border: 1px solid #ddd;
+    width: 100%;
+    height: 50px;
+    background-color: #f8f9fb; /* Уходим от черных инпутов к светлым */
+    border: 1px solid #e0e6ed;
     border-radius: 8px;
+    color: #2c3e50;
+    padding: 0 18px;
     font-size: 1rem;
-    transition: border-color 0.3s;
+    box-sizing: border-box;
+    transition: all 0.2s;
 }
 
 input:focus {
     outline: none;
-    border-color: #4facfe;
+    border-color: #0000ff; /* Синий акцент при фокусе */
+    background-color: #ffffff;
 }
 
-/* Кнопка как на картинке (яркая) */
+/* Кнопка — яркая и заметная */
 button {
-    margin-top: 10px;
-    padding: 15px;
-    background: #4facfe;
-    color: white;
+    width: 100%;
+    height: 52px;
+    background-color: #0000ff; /* Твой синий Navy, но чуть ярче */
+    color: #ffffff;
     border: none;
     border-radius: 8px;
-    font-weight: bold;
-    font-size: 1rem;
+    font-size: 1.1rem;
+    font-weight: 700;
     cursor: pointer;
-    transition: transform 0.2s, background 0.3s;
+    margin-top: 15px;
+    transition: background 0.2s;
 }
 
 button:hover {
-    background: #00c6ff;
-    transform: translateY(-2px);
+    background-color: #0000dd;
 }
 
-/* Ссылка переключения */
+/* Ссылка регистрации/входа */
 .changeMode {
+    margin-top: 30px;
+    font-size: 0.9rem;
+    color: #7f8c8d;
     text-align: center;
-    margin-top: 20px;
-    color: #777;
 }
 
 .changeMode span {
-    color: #4facfe;
+    color: #0000ff;
+    font-weight: 700;
     cursor: pointer;
-    font-weight: bold;
+    margin-left: 5px;
+}
+
+.changeMode span:hover {
     text-decoration: underline;
 }
 
+/* Ошибки */
 .error {
-    color: #ff4d4d;
+    color: #d93025;
     font-size: 0.85rem;
+    margin-top: 15px;
     text-align: center;
-}
-
-/* Скрываем разделитель, так как используем границы сторон */
-.divider {
-    display: none;
 }
