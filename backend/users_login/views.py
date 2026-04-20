@@ -22,7 +22,7 @@ def login(request):
     serializer = LoginSerializer(data=request.data)
     if serializer.is_valid():
         user = authenticate(
-            username=serializer.validated_data['username'],
+            student_id=serializer.validated_data['student_id'],
             password=serializer.validated_data['password']
         )
         if user:
