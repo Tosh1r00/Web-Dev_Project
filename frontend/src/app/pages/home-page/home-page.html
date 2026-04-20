@@ -1,79 +1,143 @@
 <header class="top-header">
-  <div class="header-left">
-    <div class="logo">KBTU Ticket</div>
-    <button type="button" class="ghost-btn">Астана</button>
-  </div>
-  <div class="header-search">
-    <button type="button" class="search-pill" aria-label="Поиск событий">
-      <span class="search-icon" aria-hidden="true">⌕</span>
-      <span class="search-placeholder">Поиск событий</span>
-    </button>
-  </div>
-  <div class="header-right">
-    <a routerLink="/my" class="ghost-btn">Мои билеты</a>
-    <button type="button" class="ghost-btn">Войти</button>
-  </div>
+  <div class="logo">KBTU Ticket</div>
 </header>
 
-<nav class="categories">
-  <a href="#">Кино</a>
-  <a href="#">Театры</a>
-  <a href="#">Концерты</a>
-  <a href="#">Стендап</a>
-  <a href="#">Музеи</a>
-  <a href="#">Детям</a>
-  <a href="#">Спорт</a>
-  <a href="#">Развлечения</a>
-  <a href="#">Мастер-классы</a>
-  <a href="#">Туры</a>
-  <a href="#">Цирковое Представление</a>
-  <a href="#">Бизнес Форумы</a>
-</nav>
+<main class="page">
+  <h1>Киноафиша</h1>
 
-<main>
-  <h1>Афиша</h1>
+  <section class="filters">
+    <div class="filters-row">
+      <div class="filter-grid">
+        <label class="field">
+          <span>Поиск</span>
+          <input
+            type="text"
+            [(ngModel)]="searchTerm"
+            (ngModelChange)="onSearchChange()"
+            placeholder="Название фильма"
+          />
+        </label>
 
-  <section class="date-strip" aria-label="Выбор даты">
-    <div class="date-strip-inner">
-      @for (d of dateOptions; track d.id) {
-        <button type="button" class="date-chip" [class.date-chip-active]="d.active">
-          <span class="date-num">{{ d.day }}</span>
-          <span class="date-wd">{{ d.weekday }}</span>
-        </button>
-      }
+        <label class="field">
+          <span>Жанр</span>
+          <select [ngModel]="selectedGenreId" (change)="onGenreChange($event)">
+            <option value="">Все жанры</option>
+            @for (genre of genres; track genre.id) {
+              <option [value]="genre.id">{{ genre.name }}</option>
+            }
+          </select>
+        </label>
+
+        <label class="field">
+          <span>Дата сеанса</span>
+          <input type="date" [(ngModel)]="selectedDate" (ngModelChange)="onDateChange()" />
+        </label>
+
+        <label class="field">
+          <span>Цена</span>
+          <select [(ngModel)]="priceSort" (ngModelChange)="onPriceSortChange()">
+            <option value="">По умолчанию</option>
+            <option value="asc">По возрастанию</option>
+            <option value="desc">По убыванию</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="actions">
+        <button type="button" (click)="resetFilters()">Сбросить</button>
+      </div>
     </div>
   </section>
 
-  @for (sec of eventSections; track sec.id) {
-    <section class="event-section">
-      <div class="section-head">
-        <h2>{{ sec.title }}</h2>
-        <a class="section-link" href="#">Смотреть все</a>
-      </div>
-      <div class="card-scroller">
-        @for (ev of sec.items; track ev.id) {
-          <article class="event-card">
-            <div class="event-poster">
-              <img [src]="ev.posterUrl" [alt]="ev.title" />
-              <span class="age-badge">{{ ev.age }}</span>
-            </div>
-            <div class="event-body">
-              <h3 class="event-title">{{ ev.title }}</h3>
-              <p class="event-meta">{{ ev.dateLine }}</p>
-              @if (ev.venue) {
-                <p class="event-venue">{{ ev.venue }}</p>
-              }
-              <div class="event-prices">
-                <p class="price-base">{{ ev.priceBase }}</p>
-              </div>
-            </div>
-          </article>
+  @if (errorMessage) {
+    <p class="message error">{{ errorMessage }}</p>
+  }
+  @if (bookingMessage) {
+    <p class="message success">{{ bookingMessage }}</p>
+  }
+  @if (isLoadingMovies && visibleMovies.length === 0) {
+    <p class="message">Загружаем фильмы...</p>
+  }
+
+  @if (!isLoadingMovies && visibleMovies.length === 0) {
+    <section class="empty-state">
+      <p>Фильмы не найдены. Измени фильтры или сбрось поиск.</p>
+      <button type="button" (click)="resetFilters()">Показать все фильмы</button>
+    </section>
+  }
+
+  <section class="movies-grid">
+    @for (movie of visibleMovies; track movie.id) {
+      <article class="movie-card">
+        <div class="poster">
+          @if (movie.poster_url || movie.poster) {
+            <img [src]="movie.poster_url || movie.poster" [alt]="movie.title" />
+          } @else {
+            <div class="poster-placeholder">No poster</div>
+          }
+          <span class="age-badge">{{ movie.age_limit }}</span>
+        </div>
+
+        <h3 class="movie-title">{{ movie.title }}</h3>
+        <p class="movie-duration">Время показа: {{ movie.duration }} мин</p>
+        <p class="movie-price">
+          от {{ movie.price }} ₸
+        </p>
+        <button type="button" (click)="selectMovie(movie)">Показать сеансы</button>
+      </article>
+    }
+  </section>
+
+  @if (selectedMovie) {
+    <section class="sessions">
+      <h2>Сеансы: {{ selectedMovie.title }}</h2>
+      @if (isLoadingSessions) {
+        <p class="message">Загружаем сеансы...</p>
+      }
+      @if (!isLoadingSessions && sessions.length === 0) {
+        <p class="message">Сеансы по выбранной дате не найдены.</p>
+      }
+      <div class="sessions-list">
+        @for (session of sessions; track session.id) {
+          <button type="button" class="session-btn" (click)="selectSession(session)">
+            {{ session.start_time | date: 'dd.MM.yyyy HH:mm' }} · {{ session.price }} ₸
+          </button>
         }
       </div>
     </section>
   }
-</main>
 
-<footer>
-  <p>2026 KBTU Ticket</p>
-</footer>
+  @if (selectedSession && seatMap) {
+    <section class="hall">
+      <h2>Выбор мест</h2>
+      @if (isLoadingSeats) {
+        <p class="message">Загружаем схему зала...</p>
+      }
+      <div class="seat-map">
+        @for (row of getSeatRows(); track row) {
+          <div class="seat-row">
+            <span class="row-label">Ряд {{ row }}</span>
+            @for (col of getSeatColumns(); track col) {
+              <button
+                type="button"
+                class="seat"
+                [class.taken]="isSeatTaken(seatCode(row, col))"
+                [class.selected]="selectedSeats.includes(seatCode(row, col))"
+                (click)="toggleSeat(seatCode(row, col))"
+              >
+                {{ col }}
+              </button>
+            }
+          </div>
+        }
+      </div>
+
+      <div class="hall-actions">
+        <p>Выбрано мест: {{ selectedSeats.length }}</p>
+        <button type="button" [disabled]="selectedSeats.length === 0 || isBooking" (click)="bookSelectedSeats()">
+          {{ isBooking ? 'Отправка...' : 'Забронировать' }}
+        </button>
+      </div>
+    </section>
+  }
+</main>
