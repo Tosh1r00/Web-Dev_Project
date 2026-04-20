@@ -23,10 +23,19 @@ class Genre(models.Model):
 
 
 class Movie(models.Model):
+    AGE_LIMIT_CHOICES = [
+        ('0+', '0+'),
+        ('6+', '6+'),
+        ('12+', '12+'),
+        ('16+', '16+'),
+        ('18+', '18+'),
+    ]
+
     title = models.CharField(max_length=100)
     description = models.TextField()
-    rating = models.FloatField()
     duration = models.IntegerField()
+    price = models.DecimalField(max_digits=8, decimal_places=2, default=2000)
+    age_limit = models.CharField(max_length=3, choices=AGE_LIMIT_CHOICES, default='12+')
     poster = models.ImageField(upload_to='images/', blank=True, null=True)
     created = models.DateTimeField(auto_now_add=True)
     genre = models.ForeignKey(Genre, on_delete=models.SET_NULL, null=True)
