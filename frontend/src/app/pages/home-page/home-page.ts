@@ -148,12 +148,8 @@ export class HomePage implements OnInit, OnDestroy {
   }
 
   selectMovie(movie: Movie): void {
-    this.selectedMovie = movie;
-    this.selectedSession = null;
-    this.seatMap = null;
-    this.selectedSeats = [];
     this.clearBookingMessage();
-    this.loadSessions(movie.id);
+    this.router.navigate(['/movies', movie.id]);
   }
 
   loadSessions(movieId: number): void {

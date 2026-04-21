@@ -53,6 +53,10 @@ export class MovieService {
     return this.http.get<Movie[]>(`${this.apiBaseUrl}/movies/`, { params });
   }
 
+  getMovie(movieId: number): Observable<Movie> {
+    return this.http.get<Movie>(`${this.apiBaseUrl}/movies/${movieId}/`);
+  }
+
   getGenres(): Observable<Genre[]> {
     return this.http.get<Genre[]>(`${this.apiBaseUrl}/genres/`);
   }

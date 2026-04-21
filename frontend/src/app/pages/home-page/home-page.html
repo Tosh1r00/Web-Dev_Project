@@ -93,69 +93,8 @@
         <p class="movie-price">
           от {{ movie.price }} ₸
         </p>
-        <button type="button" (click)="selectMovie(movie)">Показать сеансы</button>
+        <button type="button" (click)="selectMovie(movie)">Показать билеты</button>
       </article>
     }
   </section>
-
-  @if (selectedMovie) {
-    <section class="sessions">
-      <h2>Сеансы: {{ selectedMovie.title }}</h2>
-      @if (isLoadingSessions) {
-        <p class="message">Загружаем сеансы...</p>
-      }
-      @if (!isLoadingSessions && sessions.length === 0) {
-        <p class="message">Сеансы по выбранной дате не найдены.</p>
-      }
-      <div class="sessions-list">
-        @for (session of sessions; track session.id) {
-          <button type="button" class="session-btn" (click)="selectSession(session)">
-            {{ session.start_time | date: 'dd.MM.yyyy HH:mm' }} · {{ session.price }} ₸
-          </button>
-        }
-      </div>
-    </section>
-  }
-
-  @if (selectedSession && seatMap) {
-    <section class="hall">
-      <h2>Выбор мест</h2>
-      @if (isLoadingSeats) {
-        <p class="message">Загружаем схему зала...</p>
-      }
-      <div class="seat-legend">
-        <span class="legend-item"><span class="legend-dot free"></span> Свободно</span>
-        <span class="legend-item"><span class="legend-dot selected"></span> Выбрано</span>
-        <span class="legend-item"><span class="legend-dot taken"></span> Занято</span>
-      </div>
-      <div class="seat-map">
-        @for (row of getSeatRows(); track row) {
-          <div class="seat-row">
-            <span class="row-label">Ряд {{ row }}</span>
-            @for (col of getSeatColumns(); track col) {
-              <button
-                type="button"
-                class="seat"
-                [class.taken]="isSeatTaken(seatCode(row, col))"
-                [class.selected]="selectedSeats.includes(seatCode(row, col))"
-                (click)="toggleSeat(seatCode(row, col))"
-              >
-                {{ col }}
-              </button>
-            }
-          </div>
-        }
-      </div>
-
-      <div class="hall-actions">
-        <p>Выбрано мест: {{ selectedSeats.length }}</p>
-        <button type="button" [disabled]="selectedSeats.length === 0 || isBooking" (click)="bookSelectedSeats()">
-          {{ isBooking ? 'Отправка...' : 'Забронировать' }}
-        </button>
-      </div>
-      <p class="booking-hint">
-        Нажмите на место, чтобы выбрать его. Серые места уже заняты. Для бронирования нужен вход в аккаунт.
-      </p>
-    </section>
-  }
 </main>
