@@ -43,6 +43,7 @@ export class HomePage implements OnInit, OnDestroy {
 
 
   private searchTimer: ReturnType<typeof setTimeout> | null = null;
+  private bookingMessageTimer: ReturnType<typeof setTimeout> | null = null;
 
   constructor(
     private movieService: MovieService,
@@ -63,6 +64,9 @@ export class HomePage implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     if (this.searchTimer) {
       clearTimeout(this.searchTimer);
+    }
+    if (this.bookingMessageTimer) {
+      clearTimeout(this.bookingMessageTimer);
     }
   }
 
@@ -100,6 +104,7 @@ export class HomePage implements OnInit, OnDestroy {
   }
 
   onSearchChange(): void {
+    this.clearBookingMessage();
     if (this.searchTimer) {
       clearTimeout(this.searchTimer);
     }
@@ -109,12 +114,14 @@ export class HomePage implements OnInit, OnDestroy {
   }
 
   onGenreChange(event: Event): void {
+    this.clearBookingMessage();
     const target = event.target as HTMLSelectElement | null;
     this.selectedGenreId = target?.value ?? '';
     this.fetchMovies();
   }
 
   onDateChange(): void {
+    this.clearBookingMessage();
     if (!this.selectedMovie) {
       return;
     }
@@ -122,6 +129,7 @@ export class HomePage implements OnInit, OnDestroy {
   }
 
   onPriceSortChange(): void {
+    this.clearBookingMessage();
     this.applyClientFilters();
   }
 
@@ -135,17 +143,13 @@ export class HomePage implements OnInit, OnDestroy {
     this.sessions = [];
     this.seatMap = null;
     this.selectedSeats = [];
-    this.bookingMessage = '';
+    this.clearBookingMessage();
     this.fetchMovies();
   }
 
   selectMovie(movie: Movie): void {
-    this.selectedMovie = movie;
-    this.selectedSession = null;
-    this.seatMap = null;
-    this.selectedSeats = [];
-    this.bookingMessage = '';
-    this.loadSessions(movie.id);
+    this.clearBookingMessage();
+    this.router.navigate(['/movies', movie.id]);
   }
 
   loadSessions(movieId: number): void {
@@ -165,6 +169,7 @@ export class HomePage implements OnInit, OnDestroy {
 
   selectSession(session: Session): void {
     this.selectedSession = session;
+    this.clearBookingMessage();
     this.loadSeats(session.id);
   }
 
@@ -172,7 +177,7 @@ export class HomePage implements OnInit, OnDestroy {
     this.isLoadingSeats = true;
     this.errorMessage = '';
     this.selectedSeats = [];
-    this.bookingMessage = '';
+    this.clearBookingMessage();
     this.movieService.getSessionSeats(sessionId).subscribe({
       next: (seatMap) => {
         this.seatMap = seatMap;
@@ -201,18 +206,20 @@ export class HomePage implements OnInit, OnDestroy {
       return;
     }
     this.isBooking = true;
-    this.bookingMessage = '';
+    this.clearBookingMessage();
     this.errorMessage = '';
     this.movieService.createBooking(this.selectedSession.id, this.selectedSeats).subscribe({
       next: () => {
         this.isBooking = false;
         this.bookingMessage = 'Бронь отправлена успешно.';
+        this.startBookingMessageTimer();
         this.loadSeats(this.selectedSession!.id);
       },
       error: (error: HttpErrorResponse) => {
         this.isBooking = false;
         if (error.status === 401) {
           this.bookingMessage = 'Чтобы забронировать места, нужно войти или зарегистрироваться.';
+          this.startBookingMessageTimer();
           return;
         }
         this.handleApiError(error, 'Не удалось отправить бронь.');
@@ -270,6 +277,24 @@ export class HomePage implements OnInit, OnDestroy {
       return;
     }
     this.errorMessage = fallbackMessage;
+  }
+
+  private clearBookingMessage(): void {
+    this.bookingMessage = '';
+    if (this.bookingMessageTimer) {
+      clearTimeout(this.bookingMessageTimer);
+      this.bookingMessageTimer = null;
+    }
+  }
+
+  private startBookingMessageTimer(): void {
+    if (this.bookingMessageTimer) {
+      clearTimeout(this.bookingMessageTimer);
+    }
+    this.bookingMessageTimer = setTimeout(() => {
+      this.bookingMessage = '';
+      this.bookingMessageTimer = null;
+    }, 3500);
   }
 
 
