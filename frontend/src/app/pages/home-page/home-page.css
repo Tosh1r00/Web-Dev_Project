@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
 :host {
   display: block;
   min-height: 100vh;
@@ -27,7 +29,6 @@
   margin-right: 30px
 }
 
-@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 .profile-bubble {
     /* Позиционирование в правом углу через родителя или margin-left */
     margin-left: auto; 
@@ -198,6 +199,7 @@ button:disabled {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(235px, 1fr));
   gap: 14px;
+  align-items: stretch;
 }
 
 .movie-card {
@@ -209,6 +211,8 @@ button:disabled {
   flex-direction: column;
   gap: 10px;
   height: 100%;
+  transition: transform 0.24s ease, box-shadow 0.24s ease, filter 0.24s ease;
+  transform-origin: center center;
 }
 
 .poster {
@@ -272,6 +276,16 @@ button:disabled {
 
 .movie-card > button {
   margin-top: auto;
+}
+
+.movie-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 12px 30px rgba(17, 24, 39, 0.18);
+  z-index: 2;
+}
+
+.movies-grid:has(.movie-card:hover) .movie-card:not(:hover) {
+  filter: blur(1.8px);
 }
 
 .sessions,
