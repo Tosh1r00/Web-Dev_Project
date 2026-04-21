@@ -10,10 +10,15 @@ Cinema ticket booking
 ## Стек
 
 |       Часть       |                         Технологии                          |
+
 |       Backend     |Python 3.12, Django 4.2, Django REST Framework               |
+
 |       Авторизация |JWT через `djangorestframework-simplejwt`                    |
+
 |       Frontend    |Angular 17+ (standalone components)                          |
+
 |      База данных  |SQLite (для разработки)                                      |
+
 |       CORS        |`django-cors-headers`                                        |
  
 ## Структура проекта
@@ -55,54 +60,6 @@ ng serve
 ```
 Приложение открывается на `http://localhost:4200`
 
-## API endpoints
-
-### Авторизация
-
-| Метод| URL                        | Описание                                 |
-| POST | `/api/auth/register/`      | Регистрация                              |
-| POST | `/api/auth/login/`         | Вход, возвращает access + refresh токены |
-| POST | `/api/auth/logout/`        | Выход, инвалидирует refresh токен        |
-| GET  | `/api/auth/users/me/`      | Данные текущего пользователя             |
-| PATCH| `/api/auth/users/me/`      | Обновить имя пользователя                |
-| GET  | `/api/auth/users/history/` | История бронирований                     |
-| POST | `/api/token/`              | Получить JWT токены напрямую (Postman)   |
-| POST | `/api/token/refresh/`      | Обновить access токен                    |
-
-### Фильмы и каталог
-
-| Метод | URL | Описание |
-| GET | `/api/movies/` | Список фильмов. Параметр: `?genre=<id>` |
-| POST | `/api/movies/` | Добавить фильм |
-| GET | `/api/movies/<id>/` | Один фильм |
-| PUT | `/api/movies/<id>/` | Обновить фильм |
-| DELETE | `/api/movies/<id>/` | Удалить фильм |
-| GET | `/api/genres/` | Список жанров |
-| POST | `/api/genres/` | Добавить жанр |
-| GET | `/api/genres/<id>/` | Один жанр |
-| PUT | `/api/genres/<id>/` | Обновить жанр |
-| DELETE | `/api/genres/<id>/` | Удалить жанр |
-
-### Залы, сеансы и брони
-
-| Метод | URL | Описание |
-| GET | `/api/halls/` | Список залов |
-| POST | `/api/halls/` | Добавить зал |
-| GET | `/api/sessions/` | Список сеансов. Параметры: `?movie=<id>&date=<YYYY-MM-DD>` |
-| POST | `/api/sessions/` | Добавить сеанс |
-| GET | `/api/sessions/<id>/seats/` | Схема зала с занятыми местами |
-| GET | `/api/bookings/` | Брони текущего пользователя `🔒` |
-| POST | `/api/bookings/` | Забронировать места `🔒` |
-
-### Отзывы
-
-| Метод | URL | Описание |
-| GET | `/api/movies/<id>/reviews/` | Отзывы к фильму |
-| POST | `/api/movies/<id>/reviews/` | Оставить отзыв `🔒` (только если есть бронь) |
-
-`🔒` — требует JWT токен в заголовке `Authorization: Bearer <token>`
-
-
 ## Модели данных
 
 **User** — кастомная модель пользователя. Логин по `student_id` (уникальный ID студента КБТУ) вместо стандартного username.
@@ -117,8 +74,11 @@ ng serve
 
 | URL | Компонент | Описание |
 | `/movies` | HomePage | Каталог с фильтрацией по жанру, поиском по названию и сортировкой по цене |
+
 | `/movies/:id` | MovieDetailsPage | Детали фильма, выбор сеанса, схема зала, бронирование |
+
 | `/login` | LoginPage | Форма входа и регистрации (переключаются кнопкой) |
+
 | `/profile` | ProfilePage | Данные пользователя, история броней, форма отзыва |
 
 ## Авторизация
