@@ -18,13 +18,13 @@ class RegisterSerializer(serializers.ModelSerializer):
         return user 
         
 #для авторизованных пользователей просто принимаем вводные
-class LoginSerializer(serializers.Serializer):
+class LoginSerializer(serializers.ModelSerializer):
     student_id = serializers.CharField() #поменяли логин ник на логин айди
     password = serializers.CharField(write_only=True)
 
-class UserSerializer(serializers.Serializer):
+class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['id', 'username', 'student_id']
         # student_id нельзя менять после регистрации
-        read_only_fields = ['student_id']
+        read_only_fields = ['id','student_id']

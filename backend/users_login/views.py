@@ -59,12 +59,12 @@ class UserView(APIView):
     permission = [IsAuthenticated]
 
     def get(self,request):
-        serializer = UserSerializer
+        serializer = UserSerializer(request.user)
         return Response(serializer.data)
     
     def patch(self,request):
          # partial=True — можно обновить только часть полей
-        serializer = UserSerializer(request.user, data=request.data, partial=True)
+        serializer = UserSerializer (request.user, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
