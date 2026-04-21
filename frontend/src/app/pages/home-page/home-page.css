@@ -18,6 +18,61 @@
   flex-wrap: wrap;
   align-items: center;
   gap: 10px;
+
+  width: 100%; 
+  justify-content: flex-start; 
+}
+.header-actions{
+  margin-left: auto;
+  margin-right: 30px
+}
+
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+.profile-bubble {
+    /* Позиционирование в правом углу через родителя или margin-left */
+    margin-left: auto; 
+    
+    /* Флекс для выравнивания иконки и текста в ряд */
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Расстояние между иконкой и текстом */
+    
+    padding: 8px 18px;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif; /* Тот же шрифт, что в логине */
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #000080; /* Темно-синий текст */
+    
+    /* Эффект пузыря (Glassmorphism) */
+    background: rgba(255, 255, 255, 0.2); /* Прозрачный белый фон */
+    backdrop-filter: blur(8px); /* Размытие заднего плана */
+    -webkit-backdrop-filter: blur(8px);
+    
+    border-radius: 50px; /* Полное закругление как у пузыря */
+    border: 1px solid rgba(255, 255, 255, 0.4); /* Тонкая светлая граница */
+    
+    /* Сложная тень для эффекта объема */
+    box-shadow: 
+        0 4px 15px rgba(0, 0, 0, 0.05), /* Мягкая внешняя тень */
+        inset 0 2px 4px rgba(255, 255, 255, 0.7), /* Блик сверху внутри */
+        inset 0 -1px 2px rgba(0, 0, 0, 0.05); /* Легкая тень снизу внутри */
+        
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+/* Эффект при наведении */
+.profile-bubble:hover {
+    background: rgba(255, 255, 255, 0.4);
+    transform: translateY(-1px); /* Легкое всплытие */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* Стили для самой иконки внутри кнопки */
+.profile-bubble .material-icons {
+    font-size: 20px;
+    color: #0a62b9; /* Голубой акцент для иконки */
 }
 
 .logo {

@@ -1,5 +1,15 @@
 <header class="top-header">
   <div class="logo">KBTU Ticket</div>
+
+  <div class="header-actions">
+    @if (isLoggedIn) {
+      <button type="button" class="profile-bubble" (click)="goToProfile()">
+          <span class="material-icons">{{ currentUsername }}</span>
+    </button>
+    } @else {
+      <button type="button" (click)="goToLogin()">Войти</button>
+    }
+ </div>
 </header>
 
 <main class="page">

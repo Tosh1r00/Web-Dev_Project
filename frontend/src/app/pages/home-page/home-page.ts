@@ -4,6 +4,10 @@ import { FormsModule } from '@angular/forms';
 import { MovieService, Genre, Movie, Session, SeatMapResponse } from '../../services/movie.service';
 import { HttpErrorResponse } from '@angular/common/http';
 
+//Для маршрутизации и проврерки пользователя на вход
+import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
+
 @Component({
   selector: 'app-home-page',
   standalone: true,
@@ -32,16 +36,28 @@ export class HomePage implements OnInit, OnDestroy {
   isBooking = false;
   errorMessage = '';
   bookingMessage = '';
+
+  //переменные на вход
+  isLoggedIn: boolean = false;
+  currentUsername: string = '';
+
+
   private searchTimer: ReturnType<typeof setTimeout> | null = null;
 
   constructor(
     private movieService: MovieService,
     private cdr: ChangeDetectorRef,
+    private router: Router,
+    private auth: AuthService,
   ) {}
 
   ngOnInit(): void {
     this.loadGenres();
     this.fetchMovies();
+
+    //работа с кнопкой
+    this.isLoggedIn = this.auth.isLogged();
+    this.currentUsername = localStorage.getItem('username') || 'Профиль';
   }
 
   ngOnDestroy(): void {
@@ -254,5 +270,15 @@ export class HomePage implements OnInit, OnDestroy {
       return;
     }
     this.errorMessage = fallbackMessage;
+  }
+
+
+  //навигация кнопки
+  goToProfile(): void {
+    this.router.navigate(['/profile']);
+  }
+
+  goToLogin(): void {
+    this.router.navigate(['/login']);
   }
 }
