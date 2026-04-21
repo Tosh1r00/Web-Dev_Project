@@ -13,10 +13,10 @@
         }
 
         @if (!isLoading){
-            <div class="section"> <h3>История бронирований</h3> </div>
+            <div class="section"> <h3>История фильмов</h3> </div>
 
             @if (Bookings.length === 0) {
-                <div class="empty"> <p>Вы ещё ничего не бронировали</p>  </div>
+                <div class="empty"> <p>Вы ещё ничего не посмотрели</p>  </div>
             }
 
             @for(booking of Bookings; track booking.id){
