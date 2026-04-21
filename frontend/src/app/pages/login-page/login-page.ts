@@ -45,7 +45,7 @@ export class LoginPage {
     this.authService.login(this.student_id, this.password).subscribe({
       next: (response) => {
         // Сохраняем токены и идём на главную
-        this.authService.saveTokens(response.access, response.refresh);
+        this.authService.saveTokens(response.access, response.refresh, response.username);
         this.router.navigate(['/movies']);
       },
       error: (err) => {
