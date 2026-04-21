@@ -35,9 +35,26 @@ export class ProfilePage implements OnInit {
     }
 
     loadProfile(){
-        this.isLoading = false;
-        this.username = 'Anatoliy'
-        this.student_id = '24B031848'
+        this.auth.getProfile().subscribe({
+            next: (user) => {
+                this.username = user.username;
+                this.student_id = user.student_id;
+            },
+            error: () => {
+            this.errorMessage = 'Не удалось загрузить профиль';
+            }
+        })
+
+
+        this.auth.getBookings().subscribe({
+            next: (Bookings) => {
+                this.Bookings = Bookings
+                this.isLoading = false;
+                },
+            error: () => {
+                this.isLoading = false;
+                }
+        })
     }
 
 
