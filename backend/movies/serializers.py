@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Movie, Genre, Hall, Session, Booking
+from .models import Movie, Genre, Hall, Session, Booking, Review
 
 
 class GenreSerializer(serializers.Serializer):
@@ -44,3 +44,11 @@ class BookingSerializer(serializers.ModelSerializer):
         model = Booking
         fields = ['id', 'user', 'session', 'seats', 'created_at', 'is_active']
         read_only_fields = ['user', 'created_at', 'is_active']
+
+class ReviewSerializer(serializers.ModelSerializer):
+    username = serializers.CharField(source='user.username', read_only=True)
+
+    class Meta:
+        model = Review
+        fields = ['id', 'username', 'text', 'rating', 'created_at']
+        read_only_fields = ['id', 'username', 'created_at']
