@@ -120,14 +120,6 @@ export class HomePage implements OnInit, OnDestroy {
     this.fetchMovies();
   }
 
-  onDateChange(): void {
-    this.clearBookingMessage();
-    if (!this.selectedMovie) {
-      return;
-    }
-    this.loadSessions(this.selectedMovie.id);
-  }
-
   onPriceSortChange(): void {
     this.clearBookingMessage();
     this.applyClientFilters();
