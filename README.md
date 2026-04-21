@@ -1,65 +1,140 @@
 # Web-Dev_Project
 Cinema ticket booking
 
-## Project description
-Authentication and authorization (/login and /register)
+# KBTU Ticket
 
-A user registration and login system has been implemented. During registration, the user fills out a form with the fields username, email, password and password confirmation with client validation. To log in, a form with an email and password is used, the data is sent to the server, which returns a pair of JWT tokens (access and refresh).
+Платформа для бронирования билетов в кино
 
-The received tokens are stored in localStorage, and the HTTP interceptor automatically adds them to the headers of all subsequent requests.
+Пользователь может просматривать каталог фильмов, фильтровать по жанру и цене, выбирать сеанс, бронировать конкретные места в зале и оставлять отзывы на просмотренные фильмы
 
-A password recovery button is provided (in the current version there is a stub with an email input). After successful login, the user is redirected to the movie catalog page using Router Guard, which protects private routes.
+## Стек
 
-The navigation bar contains links to the "Movies", "Profile" and "Exit" sections and is hidden on the authorization pages. Error handling includes displaying messages with incorrect credentials (401) and outputting field validation errors (400).
+|       Часть       |                         Технологии                          |
+|       Backend     |Python 3.12, Django 4.2, Django REST Framework               |
+|       Авторизация |JWT через `djangorestframework-simplejwt`                    |
+|       Frontend    |Angular 17+ (standalone components)                          |
+|      База данных  |SQLite (для разработки)                                      |
+|       CORS        |`django-cors-headers`                                        |
+ 
+## Структура проекта
 
-Home page — movie catalog (/movies)
+ticketon/                Django проект
+├── ticketon/            настройки, главный urls.py
+├── movies/              фильмы, жанры, залы, сеансы, брони, отзывы
+└── users_login/         кастомная модель пользователя, авторизация
 
-The main page displays a list of films in the form of flashcards with basic information: poster, title, genre, rating and duration.
+src/                     Angular проект
+└── src/app/
+    ├── interceptors/    автоматическое добавление JWT в запросы
+    ├── services/        HTTP-сервисы
+    └── pages/
+        ├── home-page/           каталог фильмов
+        ├── movie-details-page/  детали фильма, выбор мест
+        ├── login-page/          вход и регистрация
+        └── profile-page/        профиль, история броней, отзывы
 
-Filtering and search mechanisms are implemented:
+## Запуск
 
-filter by genre via the drop-down list;
-delayed name search (debounce) to reduce the number of queries;
-date filtering, which allows you to show only current sessions.
+### Backend
 
-If there are no results, a corresponding message is displayed with the option to reset the filters.
+```bash
+cd ticketon
+pip install django djangorestframework djangorestframework-simplejwt django-cors-headers
+python manage.py migrate
+python manage.py createsuperuser
+python manage.py runserver
+```
+Сервер поднимается на `http://127.0.0.1:8000`
 
-Clicking on the movie card opens detailed information, including a list of available sessions (date, time, hall, number of available seats).
+### Frontend
 
-Selecting a session opens an interactive diagram of the hall, where:
+```bash
+cd src
+npm install
+ng serve
+```
+Приложение открывается на `http://localhost:4200`
 
-occupied seats are displayed as unavailable;
-available seats are available to choose from;
-The user can select or deselect locations.
+## API endpoints
 
-After selecting the seats, the user can send a booking request, which is saved on the server.
+### Авторизация
 
-User profile (/profile)
+| Метод| URL                        | Описание                                 |
+| POST | `/api/auth/register/`      | Регистрация                              |
+| POST | `/api/auth/login/`         | Вход, возвращает access + refresh токены |
+| POST | `/api/auth/logout/`        | Выход, инвалидирует refresh токен        |
+| GET  | `/api/auth/users/me/`      | Данные текущего пользователя             |
+| PATCH| `/api/auth/users/me/`      | Обновить имя пользователя                |
+| GET  | `/api/auth/users/history/` | История бронирований                     |
+| POST | `/api/token/`              | Получить JWT токены напрямую (Postman)   |
+| POST | `/api/token/refresh/`      | Обновить access токен                    |
 
-The profile section provides the user's personal information, including name, email, and a visual representation of the avatar in the form of initials.
+### Фильмы и каталог
 
-Main functions:
+| Метод | URL | Описание |
+| GET | `/api/movies/` | Список фильмов. Параметр: `?genre=<id>` |
+| POST | `/api/movies/` | Добавить фильм |
+| GET | `/api/movies/<id>/` | Один фильм |
+| PUT | `/api/movies/<id>/` | Обновить фильм |
+| DELETE | `/api/movies/<id>/` | Удалить фильм |
+| GET | `/api/genres/` | Список жанров |
+| POST | `/api/genres/` | Добавить жанр |
+| GET | `/api/genres/<id>/` | Один жанр |
+| PUT | `/api/genres/<id>/` | Обновить жанр |
+| DELETE | `/api/genres/<id>/` | Удалить жанр |
 
-view active bookings with the possibility of canceling them;
-viewing the history of sessions attended;
-displaying the current balance and the ability to replenish it;
-editing personal data (for example, name).
+### Залы, сеансы и брони
 
-For active bookings, a cancellation function with confirmation of the action is available. If the browsing history is empty, a corresponding message is displayed.
+| Метод | URL | Описание |
+| GET | `/api/halls/` | Список залов |
+| POST | `/api/halls/` | Добавить зал |
+| GET | `/api/sessions/` | Список сеансов. Параметры: `?movie=<id>&date=<YYYY-MM-DD>` |
+| POST | `/api/sessions/` | Добавить сеанс |
+| GET | `/api/sessions/<id>/seats/` | Схема зала с занятыми местами |
+| GET | `/api/bookings/` | Брони текущего пользователя `🔒` |
+| POST | `/api/bookings/` | Забронировать места `🔒` |
 
-All operations are accompanied by the processing of loading states and errors, including the display of loading indicators and error messages.
+### Отзывы
 
-Architecture and API interaction
+| Метод | URL | Описание |
+| GET | `/api/movies/<id>/reviews/` | Отзывы к фильму |
+| POST | `/api/movies/<id>/reviews/` | Оставить отзыв `🔒` (только если есть бронь) |
 
-The application is built using services to work with the server:
+`🔒` — требует JWT токен в заголовке `Authorization: Bearer <token>`
 
-AuthService — responsible for authentication and token management;
-MovieService — getting movie data;
-SessionService — working with sessions;
-BookingService — booking management;
-UserService — operations with the user's profile.
 
-All network requests are made via HttpClient. Angular mechanisms are used for dynamic data display and interface state management, including two-way data binding and conditional rendering.
+## Модели данных
+
+**User** — кастомная модель пользователя. Логин по `student_id` (уникальный ID студента КБТУ) вместо стандартного username.
+**Genre** — жанр фильма. Просто название.
+**Movie** — фильм. Содержит название, описание, длительность, цену, возрастной рейтинг, ссылку на постер и жанр.
+**Hall** — зал кинотеатра. Хранит количество рядов и мест в ряду — из этого строится схема мест.
+**Session** — конкретный сеанс: какой фильм, в каком зале, в какое время, по какой цене.
+**Booking** — бронь пользователя на сеанс. Места хранятся строкой в формате `"1-1,1-2,2-5"` (ряд-колонка). Поле `is_active` позволяет отменять брони без удаления из базы.
+**Review** — отзыв пользователя на фильм. Доступен только тем у кого есть хотя бы одна бронь на этот фильм.
+
+## Страницы фронтенда
+
+| URL | Компонент | Описание |
+| `/movies` | HomePage | Каталог с фильтрацией по жанру, поиском по названию и сортировкой по цене |
+| `/movies/:id` | MovieDetailsPage | Детали фильма, выбор сеанса, схема зала, бронирование |
+| `/login` | LoginPage | Форма входа и регистрации (переключаются кнопкой) |
+| `/profile` | ProfilePage | Данные пользователя, история броней, форма отзыва |
+
+## Авторизация
+
+Используется JWT. После логина фронт получает два токена и сохраняет их в `localStorage`:
+- `access` — живёт 30 минут, передаётся в каждом запросе через заголовок `Authorization: Bearer <token>`
+- `refresh` — живёт 7 дней, используется для получения нового access токена
+Токен добавляется автоматически через `authInterceptor` — перехватчик срабатывает на каждый HTTP-запрос в приложении.
+При выходе refresh токен инвалидируется на сервере через механизм token blacklist.
+
+## Заметки
+
+- Фильтрация по жанру — серверная (новый запрос к API). Поиск по названию и сортировка по цене — клиентская (без запроса).
+- При бронировании используется `transaction.atomic` + `select_for_update` — защита от ситуации когда два пользователя одновременно пытаются занять одно место.
+- Поле `student_id` нельзя изменить после регистрации — оно `read_only` в `UserSerializer`.
+- Для заполнения базы данных тестовыми данными используй Django Admin: `http://127.0.0.1:8000/admin/`
 
 ## Group members
 - Anatoliy Kim 24B031848
