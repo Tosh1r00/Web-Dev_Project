@@ -1,0 +1,102 @@
+<main class="page">
+  <div class="page-head">
+    <button type="button" class="back-btn" (click)="backToMenu()">В меню</button>
+    <h1>Детали фильма</h1>
+  </div>
+
+  @if (errorMessage) {
+    <p class="message error">{{ errorMessage }}</p>
+  }
+  @if (bookingMessage) {
+    <p class="message success">{{ bookingMessage }}</p>
+  }
+
+  @if (isLoadingMovie && !movie) {
+    <p class="message">Загружаем фильм...</p>
+  }
+
+  @if (movie) {
+    <section class="movie-panel">
+      <div class="poster">
+        @if (movie.poster_url || movie.poster) {
+          <img [src]="movie.poster_url || movie.poster" [alt]="movie.title" />
+        } @else {
+          <div class="poster-placeholder">No poster</div>
+        }
+      </div>
+      <div class="movie-info">
+        <h2>{{ movie.title }}</h2>
+        <p class="description">{{ movie.description }}</p>
+        <p><strong>Длительность:</strong> {{ movie.duration }} мин</p>
+        <p><strong>Возраст:</strong> {{ movie.age_limit }}</p>
+        <p><strong>Цена от:</strong> {{ movie.price }} ₸</p>
+      </div>
+    </section>
+
+    <section class="sessions">
+      <div class="sessions-head">
+        <h2>Сеансы</h2>
+        <label class="date-field">
+          <span>Дата</span>
+          <input type="date" [(ngModel)]="selectedDate" (ngModelChange)="onDateChange()" />
+        </label>
+      </div>
+
+      @if (isLoadingSessions) {
+        <p class="message">Загружаем сеансы...</p>
+      }
+      @if (!isLoadingSessions && sessions.length === 0) {
+        <p class="message">Сеансы по выбранной дате не найдены.</p>
+      }
+
+      <div class="sessions-list">
+        @for (session of sessions; track session.id) {
+          <button type="button" class="session-btn" (click)="selectSession(session)">
+            {{ session.start_time | date: 'dd.MM.yyyy HH:mm' }} · {{ session.price }} ₸
+          </button>
+        }
+      </div>
+    </section>
+  }
+
+  @if (selectedSession && seatMap) {
+    <section class="hall">
+      <h2>Выбор мест</h2>
+      @if (isLoadingSeats) {
+        <p class="message">Загружаем схему зала...</p>
+      }
+      <div class="seat-legend">
+        <span class="legend-item"><span class="legend-dot free"></span> Свободно</span>
+        <span class="legend-item"><span class="legend-dot selected"></span> Выбрано</span>
+        <span class="legend-item"><span class="legend-dot taken"></span> Занято</span>
+      </div>
+      <div class="seat-map">
+        @for (row of getSeatRows(); track row) {
+          <div class="seat-row">
+            <span class="row-label">Ряд {{ row }}</span>
+            @for (col of getSeatColumns(); track col) {
+              <button
+                type="button"
+                class="seat"
+                [class.taken]="isSeatTaken(seatCode(row, col))"
+                [class.selected]="selectedSeats.includes(seatCode(row, col))"
+                (click)="toggleSeat(seatCode(row, col))"
+              >
+                {{ col }}
+              </button>
+            }
+          </div>
+        }
+      </div>
+      <div class="hall-actions">
+        <p>Выбрано мест: {{ selectedSeats.length }}</p>
+        <button type="button" [disabled]="selectedSeats.length === 0 || isBooking" (click)="bookSelectedSeats()">
+          {{ isBooking ? 'Отправка...' : 'Забронировать' }}
+        </button>
+      </div>
+      <p class="booking-hint">
+        Нажмите на место, чтобы выбрать его. Серые места уже заняты. Для бронирования нужен вход в аккаунт.
+      </p>
+    </section>
+  }
+</main>
