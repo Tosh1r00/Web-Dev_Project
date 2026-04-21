@@ -8,13 +8,14 @@ from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 from django.shortcuts import get_object_or_404
 
-from .models import Movie, Genre, Hall, Session, Booking
+from .models import Movie, Genre, Hall, Session, Booking, Review
 from .serializers import (
     MovieSerializer,
     GenreSerializer,
     HallSerializer,
     SessionSerializer,
     BookingSerializer,
+    ReviewSerializer,
 )
 
 
@@ -211,3 +212,36 @@ class SessionSeatsView(APIView):
             'price': float(session.price),
         }
         return Response(data)
+    
+
+
+class MovieReviewViews(APIView):
+    def get(self,request,pk):
+        movie = get_object_or_404(Movie, pk = pk)
+        reviews = Review.objects.filter(movie=movie).order_by('-created_at') #фильтруем по дате
+
+        serializer = ReviewSerializer(reviews, many=True)
+        return Response(serializer.data)
+    
+    # только для авторизованных
+    def post(self,request, pk):
+        if not request.user.is_authenticated:
+            return Response(
+                {'error': 'Необходимо авторизоваться'},
+                status=status.HTTP_401_UNAUTHORIZED
+            )
+        movie = get_object_or_404(Movie, pk=pk)
+
+         # Проверяем что пользователь бронировал этот фильм
+        has_booking = Booking.objects.filter( user=request.user, session__movie=movie).exists()
+
+        if not has_booking:
+            return Response(
+                {'error': 'Вы можете оставить отзыв только на забронированный фильм'}, status=status.HTTP_403_FORBIDDEN
+            )
+
+        serializer = ReviewSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save(user=request.user, movie=movie)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
