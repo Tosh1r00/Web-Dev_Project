@@ -50,4 +50,24 @@ export class AuthService {
   isLogged(): boolean {
     return !!localStorage.getItem('access');
   }
+
+
+  //For profile:
+  getProfile(){
+    const access = localStorage.getItem('access') // по токену проверяем доступ
+    return this.http.get<any>('http://127.0.0.1:8000/api/auth/users/me/', {
+        headers: {
+          Authorization: `Bearer ${access}`
+      }
+    })
+  }
+
+  getBookings(){
+    const access = localStorage.getItem('access')
+    return this.http.get<any[]>('http://127.0.0.1:8000/api/auth/users/history/', {
+        headers: {
+          Authorization: `Bearer ${access}`
+      }
+    })
+  }
 }
