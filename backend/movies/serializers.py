@@ -17,19 +17,17 @@ class GenreSerializer(serializers.Serializer):
 class MovieSerializer(serializers.ModelSerializer):
     genre = GenreSerializer(read_only=True)
     genre_id = serializers.IntegerField(write_only=True)
-    poster_url = serializers.SerializerMethodField(read_only=True)
-
-    def get_poster_url(self, obj):
-        if not obj.poster:
-            return None
-        request = self.context.get('request')
-        if request:
-            return request.build_absolute_uri(obj.poster.url)
-        return obj.poster.url
 
     class Meta:
         model = Movie
-        fields = '__all__'
+        fields = [
+            'id', 'title', 'description', 'duration', 
+            'price', 'age_limit', 'poster', 'created', 
+            'genre', 'genre_id'
+        ]
+
+    def get_poster_url(self, obj):
+        return obj.poster 
 
 class HallSerializer(serializers.ModelSerializer):
     class Meta:

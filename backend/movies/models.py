@@ -31,12 +31,12 @@ class Movie(models.Model):
         ('18+', '18+'),
     ]
 
-    title = models.CharField(max_length=100)
+    title = models.CharField (max_length=100)
     description = models.TextField()
     duration = models.IntegerField()
-    price = models.DecimalField(max_digits=8, decimal_places=2, default=2000)
-    age_limit = models.CharField(max_length=3, choices=AGE_LIMIT_CHOICES, default='12+')
-    poster = models.ImageField(upload_to='images/', blank=True, null=True)
+    price = models.DecimalField (max_digits=8, decimal_places=2, default=2000)
+    age_limit = models.CharField (max_length=3, choices=AGE_LIMIT_CHOICES, default='12+')
+    poster = models.URLField (max_length = 500, blank=True, null=True)
     created = models.DateTimeField(auto_now_add=True)
     genre = models.ForeignKey(Genre, on_delete=models.SET_NULL, null=True)
 
