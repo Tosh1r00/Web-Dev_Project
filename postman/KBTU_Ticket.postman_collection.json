@@ -1,0 +1,1379 @@
+{
+  "info": {
+    "_postman_id": "1a4b63c7-d850-4558-9b75-dcf957f3948f",
+    "name": "KBTU_Ticket",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "53599250",
+    "_collection_link": "https://go.postman.co/collection/53599250-1a4b63c7-d850-4558-9b75-dcf957f3948f?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Login_USERS",
+      "item": [
+        {
+          "name": "Reg_Anatoliy",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"username\": \"Anatoliy\",\n    \"student_id\": \"24B031848\",\n    \"password\": \"anatoliy1234\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/auth/register/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "auth",
+                "register",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Reg_Oleg",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"username\": \"Oleg\",\n    \"student_id\": \"24B031849\",\n    \"password\": \"oleg1234\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/auth/register/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "auth",
+                "register",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Reg_Insar",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"username\": \"Insar\",\n    \"student_id\": \"24B031850\",\n    \"password\": \"insar1234\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/auth/register/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "auth",
+                "register",
+                ""
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Film Categories",
+      "item": [
+        {
+          "name": "Action_genre",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n   \"name\": \"Action\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/genres/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "genres",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Drama_genre",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n   \"name\": \"Drama\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/genres/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "genres",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Comedy_genre",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n   \"name\": \"Comedy\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/genres/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "genres",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Melodrama_genre",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n   \"name\": \"Melodrama\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/genres/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "genres",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Adventure_genre",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n   \"name\": \"Adventure\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/genres/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "genres",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Criminal_genre",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n   \"name\": \"Criminal\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/genres/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "genres",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Horror_genre",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n   \"name\": \"Horror\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/genres/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "genres",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Thriller_genre",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"Thriller\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/genres/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "genres",
+                ""
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Films",
+      "item": [
+        {
+          "name": "Вот это драма!",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"title\": \"Вот это драма!\",\n    \"description\": \"Чарли и Эмма влюблены друг в друга и вот-вот поженятся. Но одно невинное откровение переворачивает всё.\",\n    \"duration\": 110,\n    \"price\": 1400,\n    \"age_limit\": \"18+\",\n    \"poster\": \"https://ticketon.kz/media/upload/64968u53673_vot-eto-drama-tj.jpg\",\n    \"genre_id\": 2\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/movies/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "movies",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Панда",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"title\": \"Операция «Панда». Дикая миссия\",\n    \"description\": \"Мастеру кунг-фу Джеки предстоит перевезти своего очаровательного подопечного — панду Сюсю в новый вольер. Но на пути их настигает банда международных грабителей.\",\n    \"duration\": 100,\n    \"price\": 1200,\n    \"age_limit\": \"12+\",\n    \"poster\": \"https://ticketon.kz/media/upload/64783u57548_afisha-tiketon-30.jpg\",\n    \"genre_id\": 3\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/movies/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "movies",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Мумия Ли Кронина",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"title\": \"Мумия Ли Кронина\",\n    \"description\": \"Маленькая дочь журналиста бесследно исчезает в пустыне. Восемь лет спустя сломленная семья потрясена её возвращением, но радость встречи оборачивается настоящим кошмаром.\",\n    \"duration\": 134,\n    \"price\": 1200,\n    \"age_limit\": \"18+\",\n    \"poster\": \"https://ticketon.kz/media/upload/64969u53673_mumiya-2026.jpg\",\n    \"genre_id\": 8\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/movies/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "movies",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Супер Марио: Галактическое кино",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"title\": \"Супер Марио: Галактическое кино\",\n    \"description\": \"После победы над Боузером и спасения Бруклина Марио сталкивается со злобным альянсом Варио и Боузера-младшего. Теперь вместе со своими друзьями и Йоши он должен помешать их планам по завоеванию мирового господства.\",\n    \"duration\": 99,\n    \"price\": 1500,\n    \"age_limit\": \"6+\",\n    \"poster\": \"https://ticketon.kz/media/upload/64634u57548_afisha-tiketon--2026-03-24t115655-896.jpg\",\n    \"genre_id\": 3\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/movies/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "movies",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Періште",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"title\": \"Періште\",\n    \"description\": \"Переехав из маленького посёлка в большой город ради учёбы, Айжан мечтала о новой, свободной жизни и большой любви. Втайне от родителей она выходит замуж, уверенная, что обрела семейное счастье. Однако внезапно открывшаяся правда о муже оборачивается трагедией, после которой в её жизни появляются дети, которых она не ждала и не выбирала. История о женщине, которой предстоит найти силы принять жизнь, к которой она не была готова.\",\n    \"duration\": 89,\n    \"price\": 1200,\n    \"age_limit\": \"18+\",\n    \"poster\": \"https://ticketon.kz/media/upload/64799u57548_afisha-tiketon-44.jpg\",\n    \"genre_id\": 2\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/movies/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "movies",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Туысқан",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"title\": \"Туысқан\",\n    \"description\": \"После смерти богатого предпринимателя Аскара вся его родня вступает в борьбу за наследство. Разбалованный сын Самат должен противостоять давлению родственников и доказать, что он достоин стать настоящим наследником.\",\n    \"duration\": 107,\n    \"price\": 1400,\n    \"age_limit\": \"16+\",\n    \"poster\": \"https://ticketon.kz/media/upload/64933u53673_tuysan-2026.jpg\",\n    \"genre_id\": 2\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/movies/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "movies",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Нелегал. Через Мексику",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"title\": \"Нелегал. Через Мексику\",\n    \"description\": \"Фильм рассказывает о Чыңгызе, который должен нелегально пройти через множества стран, чтобы добраться до Мексики, и в конечном итоге найти и спасти своего похищенного брата. Путешествие полно препятствий, включая уклонение от иммиграционной полиции, взаимодействие с местными бандами и преодоление опасных территорий. История сочетает в себе экшн, драму и юмор, подчёркивая темы семьи, жертвенности ради близкого и стойкости духа.\",\n    \"duration\": 113,\n    \"price\": 1400,\n    \"age_limit\": \"18+\",\n    \"poster\": \"https://ticketon.kz/media/upload/64934u53673_nelegal-cherez-meksiku-202612.jpg\",\n    \"genre_id\": 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/movies/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "movies",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Темірлан",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"title\": \"Темірлан\",\n    \"description\": \"14 век. Монгольская империя рушится и некогда процветающие города лежат в руинах. В этот сложный период закалённому в боях Тимуру Барласу предстоит столкнуться с предательством и тяжёлым выбором, чтобы защитить судьбу Великого Шелкового пути и свою любовь.\",\n    \"duration\": 107,\n    \"price\": 1300,\n    \"age_limit\": \"16+\",\n    \"poster\": \"https://ticketon.kz/media/upload/64780u54364_temirlan-202608042026.jpg\",\n    \"genre_id\": 5\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/movies/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "movies",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Ты, я и лето в Тоскане",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"title\": \"Ты, я и лето в Тоскане\",\n    \"description\": \"Когда девушка поселяется на пустующей итальянской вилле, выдавая себя за невесту её владельца, она неожиданно находит любовь, способную изменить её жизнь.\",\n    \"duration\": 104,\n    \"age_limit\": \"16+\",\n    \"poster\": \"https://ticketon.kz/media/upload/64936u53673_ty-ya-i-leto-v-toskane-2026.jpg\",\n    \"genre_id\": 4\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/movies/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "movies",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Петрушка",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"title\": \"Петрушка\",\n    \"description\": \"Талант есть, а смелости - нет. Так и жил бы повар Петя в тени своей неуверенности, если бы не детский обет, данный бабушке, и неожиданный шанс - попасть на кухню престижного ресторана. Но его ждёт не воплощение мечты, а горькое открытие: его лучший друг Рома готов на всё ради звёздного статуса. В одиночку Петя не справился бы, но ему на помощь приходит... ожившая кукла Петрушка. Её колючая мудрость обнажает правду и помогает Пете победить свои слабости. В погоне за мечтой и любовью, Петя должен найти в себе силы, чтобы выполнить детское обещание и обрести самого себя.\",\n    \"duration\": 110,\n    \"price\": 1400,\n    \"age_limit\": \"6+\",\n    \"poster\": \"https://ticketon.kz/media/upload/64785u57548_afisha-tiketon-32.jpg\",\n    \"genre_id\": 3\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/movies/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "movies",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Королёк моей любви",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"title\": \"Королёк моей любви\",\n    \"description\": \"Благородный и всеми любимый полицейский Рамаш, благодаря которому в городе Хурмада царит мир и порядок, вступает в борьбу с хитрым алчным бандитом Шамаром. Воспитанный приёмными родителями Шамар устраивает в городе серию преступлений, и Рамаш встаёт на защиту Хурмады. В ходе активного противостояния выясняется, что Рамаш и Шамар - разлучённые в детстве братья. Расследование братьев выводит их на след виновника великого пожара, который унёс жизни родителей Рамаша и Шамара. Им оказывается меценат и покровитель Хурмады - Сандурлай, с которым им предстоит сразиться.\",\n    \"duration\": 111,\n    \"price\": 3500,\n    \"age_limit\": \"16+\",\n    \"poster\": \"https://ticketon.kz/media/upload/64777u57548_afisha-tiketon-25.jpg\",\n    \"genre_id\": 3\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/movies/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "movies",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Моя собака – космонавт",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"title\": \"Моя собака – космонавт\",\n    \"description\": \"1960 год. В городке у космодрома Байконур, где каждый запуск ракеты озаряет небо мечтами, живёт десятилетний Миша - мальчик со светлой головой, полной космических фантазий. В свой день рождения Миша находит собаку Белку, которая предопределит не только его судьбу, но и напишет новую страницу в истории освоения космоса.\",\n    \"duration\": 103,\n    \"price\": 1700,\n    \"age_limit\": \"6+\",\n    \"poster\": \"https://ticketon.kz/media/upload/64935u53673_moya-sobaka-kosmonavt-2026.jpg\",\n    \"genre_id\": 5\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/movies/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "movies",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Красная маска. Настольная книга супергероя",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"title\": \"Красная маска. Настольная книга супергероя\",\n    \"description\": \"Прячась в библиотеке от одноклассников, с которыми не ладит, Лиза находит «Настольную книгу супергероя». В ней заключены советы, как развить в себе суперспособности. Девочка начинает тренироваться - учится летать и понимать язык животных - и помогает людям в беде, получив прозвище Красная маска. Тем временем злодеи собираются погрузить город в вечную тьму. Лизе нужно собрать команду единомышленников, чтобы противостоять злу, спасти город и доказать, что супергероем может стать каждый.\",\n    \"duration\": 91,\n    \"price\": 1300,\n    \"age_limit\": \"6+\",\n    \"poster\": \"https://ticketon.kz/media/upload/64800u57548_afisha-tiketon-45.jpg\",\n    \"genre_id\": 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/movies/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "movies",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Дети леса 2",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"title\": \"Дети леса 2\",\n    \"description\": \"Человек-пума Караг продолжает обучение в секретной академии для подростков-оборотней и тоскует по семье. Неожиданно Эндрю Миллинг, главный противник Карага и его бывший наставник, предлагает ему сделку - дать ложные показания на совете академии в обмен на встречу с родными. Караг соглашается, даже не подозревая о планах Миллинга относительно судьбы школы и об опасностях, с которыми парню и его друзьям весёлой белке Холли, отважной волчице Тикаани и верному бизону Брендону предстоит столкнуться.\",\n    \"duration\": 102,\n    \"price\": 3500,\n    \"age_limit\": \"12+\",\n    \"poster\": \"https://ticketon.kz/media/upload/64774u53673_deti-lesa-2-2026.jpg\",\n    \"genre_id\": 7\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/movies/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "movies",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Конец света",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"title\": \"Конец света\",\n    \"description\": \"Учитель науки Райланд Грейс просыпается на космическом корабле в нескольких световых годах от Земли, не помня, кто он и как сюда попал. По мере того как к нему возвращается память, он начинает распутывать свою миссию: разгадать тайну загадочного вещества, из-за которого умирает Солнце. Ему предстоит использовать свои научные знания и нестандартные идеи, чтобы спасти всё человечество от вымирания... но неожиданная дружба показывает, что ему, возможно, не придётся делать это в одиночку.\",\n    \"duration\": 156,\n    \"price\": 1500,\n    \"age_limit\": \"16+\",\n    \"poster\": \"https://ticketon.kz/media/upload/63880u57548_afisha-tiketon--2026-02-26t135111-638.jpg\",\n    \"genre_id\": 5\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/movies/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "movies",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Таптым-ау сені 3",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"title\": \"Таптым-ау сені 3\",\n    \"description\": \"Сауле и Жексен зарабатывают на жизнь продажей баурсаков. Однажды они решаются на ограбление, чтобы организовать торжество и отпраздновать первый год сына. Однако каждый шаг Жексена к «лёгким деньгам» приносит ещё больше сложностей и проблем.\",\n    \"duration\": 90,\n    \"price\": 1600,\n    \"age_limit\": \"16+\",\n    \"poster\": \"https://ticketon.kz/media/upload/63903u57548_afisha-tiketon--2026-02-26t163744-761.jpg\",\n    \"genre_id\": 4\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/movies/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "movies",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Я иду искать 2",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"title\": \"Я иду искать 2\",\n    \"description\": \"Едва пережив кровавую атаку семьи Ле Домас, Грейс понимает: кошмарная игра не окончена — она лишь выходит на новый, ещё более опасный уровень. На этот раз рядом с ней оказывается её сестра Фэйт. У Грейс есть всего один шанс выжить, сохранить сестре жизнь и завладеть Высшим креслом Совета, который управляет всем миром. За трон охотятся четыре враждующих семьи, и победитель получит абсолютную власть.\",\n    \"duration\": 108,\n    \"price\": 1000,\n    \"age_limit\": \"18+\",\n    \"poster\": \"https://ticketon.kz/media/upload/63873u57548_afisha-tiketon--2026-02-26t133013-988.jpg\",\n    \"genre_id\": 8\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/movies/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "movies",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Нормал",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"title\": \"Нормал\",\n    \"description\": \"Улисс приезжает в небольшой городок Нормал, чтобы временно занять должность шерифа. Город кажется безопасным, почти сонным и дружелюбным. Но после ограбления банка Улисс обнаруживает преступный заговор, в который вовлечён весь город. Теперь ему предстоит решить, готов ли он пойти до конца и разрушить кажущуюся идиллию.\",\n    \"duration\": 91,\n    \"price\": 1500,\n    \"age_limit\": \"18+\",\n    \"poster\": \"https://ticketon.kz/files/media/65027u53673_normal-2026.jpg\",\n    \"genre_id\": 7\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/movies/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "movies",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Ящер",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"title\": \"Ящер\",\n    \"description\": \"Остров в Юго-Восточной Азии. Эколог с помощью местного охотника изучает уникальную флору и фауну и узнаёт, что после постройки на острове фабрики природа вокруг начала меняться. Тем временем на остров падает метеорит, и животные становятся ещё более кровожадными и увеличиваются в размерах под воздействием минералов из космоса.\",\n    \"duration\": 110,\n    \"price\": 1500,\n    \"age_limit\": \"16+\",\n    \"poster\": \"https://ticketon.kz/media/upload/64937u53673_yashcher-2026.jpg\",\n    \"genre_id\": 5\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/movies/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "movies",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Они придут за тобой",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"title\": \"Они придут за тобой\",\n    \"description\": \"Домработница откликается на вакансию в одном из престижных домов Нью-Йорка. Начиная работать на новых обеспеченных хозяев, она, сама того не подозревая, попадает в тайное сообщество, связанное с исчезновениями людей.\",\n    \"duration\": 94,\n    \"price\": 1500,\n    \"age_limit\": \"18+\",\n    \"poster\": \"https://ticketon.kz/media/upload/64444u57548_whatsapp-image-2026-03-26-at-10-31-58.jpg\",\n    \"genre_id\": 8\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/movies/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "movies",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Неаполь – Нью-Йорк",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"title\": \"Неаполь – Нью-Йорк\",\n    \"description\": \"Спасаясь от бедности в послевоенной Италии, двое детей, Кармине и Селестина, тайно проникают на корабль, следующий из Неаполя в Нью-Йорк. Они мечтают разыскать сестру Селестины, эмигрировавшую в Америку двумя годами ранее.\",\n    \"duration\": 124,\n    \"price\": 1700,\n    \"age_limit\": \"16+\",\n    \"poster\": \"https://ticketon.kz/media/upload/64851u53673_neapol-nyu-york-2024.jpg\",\n    \"genre_id\": 2\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/movies/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "movies",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Ходячий замок",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"title\": \"Ходячий замок\",\n    \"description\": \"Злая ведьма заточила 18-летнюю Софи в тело старухи. Девушка-бабушка бежит из города куда глаза глядят и встречает удивительный дом на ножках, где знакомится с могущественным волшебником Хаулом и демоном Кальцифером. Кальцифер должен служить Хаулу по договору, условия которого он не может разглашать. Девушка и демон решают помочь друг другу избавиться от злых чар.\",\n    \"duration\": 119,\n    \"price\": 3500,\n    \"age_limit\": \"6+\",\n    \"poster\": \"https://api-gw.ticketon.kz/f3/v1/images/cac31cd5-db00-42fd-b376-5f94ed756892.jpg\",\n    \"genre_id\": 5\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/movies/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "movies",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "В погоне за счастьем",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"title\": \"В погоне за счастьем\",\n    \"description\": \"Крис Гарднер – отец-одиночка. Воспитывая пятилетнего сына, Крис изо всех сил старается сделать так, чтобы ребенок рос счастливым. Работая продавцом, он не может оплатить квартиру, и их выселяют. Оказавшись на улице, но не желая сдаваться, отец устраивается стажером в брокерскую компанию, рассчитывая получить должность специалиста. Только на протяжении стажировки он не будет получать никаких денег, а стажировка длится 6 месяцев...\",\n    \"duration\": 117,\n    \"price\": 3500,\n    \"age_limit\": \"12+\",\n    \"poster\": \"https://api-gw.ticketon.kz/f3/v1/images/9ce86d93-0647-4373-bbbf-87a65824f5d5.jpg\",\n    \"genre_id\": 2\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/movies/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "movies",
+                ""
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "GET, PATCH, DELETE",
+      "item": [
+        {
+          "name": "Delete_1",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"title\": \"Вот это драма!\",\n    \"description\": \"Чарли и Эмма влюблены друг в друга и вот-вот поженятся. Но одно невинное откровение переворачивает всё.\",\n    \"duration\": 110,\n    \"price\": 1400,\n    \"age_limit\": \"18+\",\n    \"genre_id\": 2\n}"
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/movies/3/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "movies",
+                "3",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete_2",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"title\": \"Вот это драма!\",\n    \"description\": \"Чарли и Эмма влюблены друг в друга и вот-вот поженятся. Но одно невинное откровение переворачивает всё.\",\n    \"duration\": 110,\n    \"price\": 1400,\n    \"age_limit\": \"18+\",\n    \"genre_id\": 2\n}"
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/movies/4/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "movies",
+                "4",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Change Genre",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n   \"name\": \"Documentary\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/genres/6/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "genres",
+                "6",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete_3",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"title\": \"Вот это драма!\",\n    \"description\": \"Чарли и Эмма влюблены друг в друга и вот-вот поженятся. Но одно невинное откровение переворачивает всё.\",\n    \"duration\": 110,\n    \"price\": 1400,\n    \"age_limit\": \"18+\",\n    \"genre_id\": 2\n}"
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/movies/16/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "movies",
+                "16",
+                ""
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Reg(test)",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"username\": \"testuser\",\n    \"email\": \"test@mail.com\",\n    \"password\": \"test1234\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/auth/register/",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "auth",
+            "register",
+            ""
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Login(test)",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"username\": \"testuser\",\n    \"password\": \"test1234\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/auth/login/",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "auth",
+            "login",
+            ""
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "LogOut(test)",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"refresh\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc3NzI5MTU0NiwiaWF0IjoxNzc2Njg2NzQ2LCJqdGkiOiJjMzUzOWExYjg3YjU0MTg3ODBmZTlhMjFmOTc3ODFhNiIsInVzZXJfaWQiOiIxIn0.7aX6N1vjC3XhHrKDBC1zTcR5ZVZTZn2g4TBhUQuauCw\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/auth/logout/",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "auth",
+            "logout",
+            ""
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
