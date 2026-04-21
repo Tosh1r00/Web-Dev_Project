@@ -123,6 +123,11 @@
       @if (isLoadingSeats) {
         <p class="message">Загружаем схему зала...</p>
       }
+      <div class="seat-legend">
+        <span class="legend-item"><span class="legend-dot free"></span> Свободно</span>
+        <span class="legend-item"><span class="legend-dot selected"></span> Выбрано</span>
+        <span class="legend-item"><span class="legend-dot taken"></span> Занято</span>
+      </div>
       <div class="seat-map">
         @for (row of getSeatRows(); track row) {
           <div class="seat-row">
@@ -148,7 +153,9 @@
           {{ isBooking ? 'Отправка...' : 'Забронировать' }}
         </button>
       </div>
-      <p class="booking-hint">Для бронирования мест нужно войти или зарегистрироваться.</p>
+      <p class="booking-hint">
+        Нажмите на место, чтобы выбрать его. Серые места уже заняты. Для бронирования нужен вход в аккаунт.
+      </p>
     </section>
   }
 </main>

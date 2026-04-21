@@ -208,11 +208,16 @@ button:disabled {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  height: 100%;
 }
 
 .poster {
   position: relative;
-  height: 300px;
+  width: 100%;
+  max-width: 100%;
+  aspect-ratio: 2 / 3;
+  max-height: 320px;
+  min-height: 280px;
   overflow: hidden;
   border-radius: 14px;
   background: linear-gradient(145deg, #dbeafe, #ede9fe);
@@ -249,6 +254,7 @@ button:disabled {
   font-size: 1rem;
   line-height: 1.35;
   margin: 0;
+  min-height: 2.7em;
 }
 
 .movie-duration {
@@ -262,6 +268,10 @@ button:disabled {
   font-size: 0.95rem;
   font-weight: 700;
   margin: 0;
+}
+
+.movie-card > button {
+  margin-top: auto;
 }
 
 .sessions,
@@ -294,6 +304,36 @@ button:disabled {
   display: flex;
   flex-direction: column;
   gap: 8px;
+}
+
+.seat-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 10px 0 14px;
+  color: #4b5563;
+  font-size: 0.9rem;
+}
+
+.legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.legend-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  background: #e5e7eb;
+}
+
+.legend-dot.selected {
+  background: #22c55e;
+}
+
+.legend-dot.taken {
+  background: #9ca3af;
 }
 
 .seat-row {
