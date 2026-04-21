@@ -30,9 +30,10 @@ export class AuthService {
   }
 
   // Сохранить токены в localStorage
-  saveTokens(access: string, refresh: string) {
+  saveTokens(access: string, refresh: string, username:string = '') {
     localStorage.setItem('access', access);
     localStorage.setItem('refresh', refresh);
+    localStorage.setItem('username', username);
   }
 
   // Выход
@@ -53,21 +54,11 @@ export class AuthService {
 
 
   //For profile:
-  getProfile(){
-    const access = localStorage.getItem('access') // по токену проверяем доступ
-    return this.http.get<any>('http://127.0.0.1:8000/api/auth/users/me/', {
-        headers: {
-          Authorization: `Bearer ${access}`
-      }
-    })
-  }
+ getProfile() {
+  return this.http.get<any>('http://127.0.0.1:8000/api/auth/users/me/');
+}
 
-  getBookings(){
-    const access = localStorage.getItem('access')
-    return this.http.get<any[]>('http://127.0.0.1:8000/api/auth/users/history/', {
-        headers: {
-          Authorization: `Bearer ${access}`
-      }
-    })
-  }
+getBookings() {
+  return this.http.get<any[]>('http://127.0.0.1:8000/api/auth/users/history/');
+}
 }
