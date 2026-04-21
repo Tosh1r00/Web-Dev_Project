@@ -1,102 +1,98 @@
-# Web-Dev_Project
+Web-Dev_Project
+
 Cinema ticket booking
 
-# KBTU Ticket
+KBTU Ticket
 
-Платформа для бронирования билетов в кино
+A platform for booking movie tickets
 
-Пользователь может просматривать каталог фильмов, фильтровать по жанру и цене, выбирать сеанс, бронировать конкретные места в зале и оставлять отзывы на просмотренные фильмы
+The user can browse the movie catalog, filter by genre and price, choose a session, book specific seats in the hall, and leave reviews for watched movies
 
-## Стек
+Stack
 
-|       Часть       |                         Технологии                          |
+| Part | Technologies |
 
-|       Backend     |Python 3.12, Django 4.2, Django REST Framework               |
+| Backend |Python 3.12, Django 4.2, Django REST Framework |
 
-|       Авторизация |JWT через `djangorestframework-simplejwt`                    |
+| Authentication |JWT via djangorestframework-simplejwt |
 
-|       Frontend    |Angular 17+ (standalone components)                          |
+| Frontend |Angular 17+ (standalone components) |
 
-|      База данных  |SQLite (для разработки)                                      |
+| Database |SQLite (for development) |
 
-|       CORS        |`django-cors-headers`                                        |
- 
-## Структура проекта
+| CORS |django-cors-headers |
 
-ticketon/                Django проект
-├── ticketon/            настройки, главный urls.py
-├── movies/              фильмы, жанры, залы, сеансы, брони, отзывы
-└── users_login/         кастомная модель пользователя, авторизация
+Project Structure
 
-src/                     Angular проект
+ticketon/ Django project
+├── ticketon/ settings, main urls.py
+├── movies/ films, genres, halls, sessions, bookings, reviews
+└── users_login/ custom user model, authentication
+
+src/ Angular project
 └── src/app/
-    ├── interceptors/    автоматическое добавление JWT в запросы
-    ├── services/        HTTP-сервисы
-    └── pages/
-        ├── home-page/           каталог фильмов
-        ├── movie-details-page/  детали фильма, выбор мест
-        ├── login-page/          вход и регистрация
-        └── profile-page/        профиль, история броней, отзывы
+├── interceptors/ automatic JWT injection into requests
+├── services/ HTTP services
+└── pages/
+├── home-page/ movie catalog
+├── movie-details-page/ movie details, seat selection
+├── login-page/ login and registration
+└── profile-page/ profile, booking history, reviews
 
-## Запуск
-
-### Backend
-
-```bash
+Run
+Backend
 cd ticketon
 pip install django djangorestframework djangorestframework-simplejwt django-cors-headers
 python manage.py migrate
 python manage.py createsuperuser
 python manage.py runserver
-```
-Сервер поднимается на `http://127.0.0.1:8000`
 
-### Frontend
+Server runs at http://127.0.0.1:8000
 
-```bash
+Frontend
 cd src
 npm install
 ng serve
-```
-Приложение открывается на `http://localhost:4200`
 
-## Модели данных
+Application opens at http://localhost:4200
 
-**User** — кастомная модель пользователя. Логин по `student_id` (уникальный ID студента КБТУ) вместо стандартного username.
-**Genre** — жанр фильма. Просто название.
-**Movie** — фильм. Содержит название, описание, длительность, цену, возрастной рейтинг, ссылку на постер и жанр.
-**Hall** — зал кинотеатра. Хранит количество рядов и мест в ряду — из этого строится схема мест.
-**Session** — конкретный сеанс: какой фильм, в каком зале, в какое время, по какой цене.
-**Booking** — бронь пользователя на сеанс. Места хранятся строкой в формате `"1-1,1-2,2-5"` (ряд-колонка). Поле `is_active` позволяет отменять брони без удаления из базы.
-**Review** — отзыв пользователя на фильм. Доступен только тем у кого есть хотя бы одна бронь на этот фильм.
+Data Models
 
-## Страницы фронтенда
+User — custom user model. Login via student_id (unique KBTU student ID) instead of default username.
+Genre — movie genre. Simple name field.
+Movie — film. Contains title, description, duration, price, age rating, poster URL, and genre.
+Hall — cinema hall. Stores number of rows and seats per row — used to generate seat layout.
+Session — specific screening: which movie, which hall, what time, and price.
+Booking — user booking for a session. Seats are stored as a string in format "1-1,1-2,2-5" (row-column). The is_active field allows cancellation without deleting records.
+Review — user review for a movie. Available only to users who have at least one booking for that movie.
 
-| URL | Компонент | Описание |
-| `/movies` | HomePage | Каталог с фильтрацией по жанру, поиском по названию и сортировкой по цене |
+Frontend Pages
 
-| `/movies/:id` | MovieDetailsPage | Детали фильма, выбор сеанса, схема зала, бронирование |
+| /movies | HomePage | Catalog with genre filtering, title search, and price sorting |
 
-| `/login` | LoginPage | Форма входа и регистрации (переключаются кнопкой) |
+| /movies/:id | MovieDetailsPage | Movie details, session selection, hall seat map, booking |
 
-| `/profile` | ProfilePage | Данные пользователя, история броней, форма отзыва |
+| /login | LoginPage | Login and registration form (toggle button) |
 
-## Авторизация
+| /profile | ProfilePage | User data, booking history, review form |
 
-Используется JWT. После логина фронт получает два токена и сохраняет их в `localStorage`:
-- `access` — живёт 30 минут, передаётся в каждом запросе через заголовок `Authorization: Bearer <token>`
-- `refresh` — живёт 7 дней, используется для получения нового access токена
-Токен добавляется автоматически через `authInterceptor` — перехватчик срабатывает на каждый HTTP-запрос в приложении.
-При выходе refresh токен инвалидируется на сервере через механизм token blacklist.
+Authentication
 
-## Заметки
+JWT is used. After login, the frontend receives two tokens and stores them in localStorage:
 
-- Фильтрация по жанру — серверная (новый запрос к API). Поиск по названию и сортировка по цене — клиентская (без запроса).
-- При бронировании используется `transaction.atomic` + `select_for_update` — защита от ситуации когда два пользователя одновременно пытаются занять одно место.
-- Поле `student_id` нельзя изменить после регистрации — оно `read_only` в `UserSerializer`.
-- Для заполнения базы данных тестовыми данными используй Django Admin: `http://127.0.0.1:8000/admin/`
+access — valid for 30 minutes, sent in every request via Authorization: Bearer <token>
+refresh — valid for 7 days, used to obtain a new access token
 
-## Group members
-- Anatoliy Kim 24B031848
-- Oleg Ukhov 24B032091
-- Insar Batyrgeldy 24B031690
+The token is automatically added via authInterceptor — an interceptor that runs on every HTTP request in the application.
+On logout, the refresh token is invalidated on the server using a token blacklist mechanism.
+
+Notes
+Genre filtering is server-side (new API request). Search by title and price sorting are client-side (no request).
+Booking uses transaction.atomic + select_for_update — protection against two users booking the same seat simultaneously.
+The student_id field cannot be changed after registration — it is read_only in UserSerializer.
+To populate the database with test data, use Django Admin: http://127.0.0.1:8000/admin/
+
+Group members
+Anatoliy Kim 24B031848
+Oleg Ukhov 24B032091
+Insar Batyrgeldy 24B031690
