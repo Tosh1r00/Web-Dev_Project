@@ -25,18 +25,28 @@ Stack
 Project Structure
 
 ticketon/ Django project
+
 ├── ticketon/ settings, main urls.py
+
 ├── movies/ films, genres, halls, sessions, bookings, reviews
+
 └── users_login/ custom user model, authentication
 
 src/ Angular project
 └── src/app/
+
 ├── interceptors/ automatic JWT injection into requests
+
 ├── services/ HTTP services
+
 └── pages/
+
 ├── home-page/ movie catalog
+
 ├── movie-details-page/ movie details, seat selection
+
 ├── login-page/ login and registration
+
 └── profile-page/ profile, booking history, reviews
 
 Run
