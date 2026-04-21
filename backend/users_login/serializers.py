@@ -18,7 +18,7 @@ class RegisterSerializer(serializers.ModelSerializer):
         return user 
         
 #для авторизованных пользователей просто принимаем вводные
-class LoginSerializer(serializers.ModelSerializer):
+class LoginSerializer(serializers.Serializer):
     student_id = serializers.CharField() #поменяли логин ник на логин айди
     password = serializers.CharField(write_only=True)
 
