@@ -1,0 +1,36 @@
+
+    <div class="profile">
+        <div class="profile-header">
+            <div class="profile-info">
+            <h2>{{ username }}</h2>
+            <p>{{ student_id }}</p>
+            </div>
+            <button class="logout-btn" (click)="logout()">Выйти</button>
+        </div>
+
+        @if (isLoading){
+            <div class="loading">Loading...</div>
+        }
+
+        @if (!isLoading){
+            <div class="section"> <h3>История бронирований</h3> </div>
+
+            @if (Bookings.length === 0) {
+                <div class="empty"> <p>Вы ещё ничего не бронировали</p>  </div>
+            }
+
+            @for(booking of Bookings; track booking.id){
+                <div class="booking-card">
+                    <div class="booking-info">
+                        <h4>{{ booking.session?.movie?.title }}</h4>
+                        <p>Дата: {{ booking.session?.start_time | date:'dd.MM.yyyy HH:mm' }}</p>
+                        <p>Места: {{ booking.seats }}</p>
+                        <p>Зал: {{ booking.session?.hall?.name }}</p>
+                    </div>
+                    <div class="booking-status" [class.active]="booking.is_active">
+                        {{ booking.is_active ? 'Активна' : 'Завершена' }}
+                    </div>
+                    </div>
+                }
+        }
+    </div>

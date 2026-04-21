@@ -1,0 +1,115 @@
+/* 1. ГЛАВНЫЙ КОНТЕЙНЕР */
+.profile {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 20px;
+    font-family: 'Poppins', 'Segoe UI', Roboto, sans-serif; /* Тот же шрифт, что и в логине */
+    color: #2c3e50;
+}
+
+/* 2. ШАПКА ПРОФИЛЯ */
+.profile-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(135deg, #4da3ff 0%, #000080 100%); /* Твой фирменный градиент */
+    padding: 30px 40px;
+    border-radius: 15px;
+    color: white;
+    box-shadow: 0 10px 25px rgba(0, 0, 80, 0.2);
+    margin-bottom: 40px;
+}
+
+.profile-info h2 {
+    font-size: 2rem;
+    font-weight: 800;
+    margin: 0;
+    letter-spacing: -0.5px;
+}
+
+.profile-info p {
+    margin: 5px 0 0;
+    opacity: 0.9;
+    font-weight: 500;
+}
+
+/* Кнопка выхода */
+.logout-btn {
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid white;
+    color: white;
+    padding: 10px 25px;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.logout-btn:hover {
+    background: white;
+    color: #000080; /* Темно-синий при наведении */
+}
+
+/* 3. СЕКЦИЯ ИСТОРИИ */
+.section h3 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin-bottom: 25px;
+    border-left: 5px solid #0000ff; /* Акцентная линия */
+    padding-left: 15px;
+}
+
+/* 4. КАРТОЧКИ БРОНИРОВАНИЙ */
+.booking-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+    border-radius: 12px;
+    padding: 20px 30px;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); /* Мягкая тень как в модалке */
+    border: 1px solid #f0f2f5;
+    transition: transform 0.2s ease;
+}
+
+.booking-card:hover {
+    transform: translateY(-3px);
+    border-color: #4da3ff;
+}
+
+.booking-info h4 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin: 0 0 8px 0;
+    color: #000080;
+}
+
+.booking-info p {
+    margin: 4px 0;
+    font-size: 0.9rem;
+    color: #7f8c8d;
+}
+
+/* Статус бронирования */
+.booking-status {
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    background: #f0f2f5;
+    color: #95a5a6;
+}
+
+.booking-status.active {
+    background: rgba(46, 204, 113, 0.1); /* Нежно-зеленый */
+    color: #2ecc71;
+}
+
+/* 5. СОСТОЯНИЯ (LOADING/EMPTY) */
+.loading, .empty {
+    text-align: center;
+    padding: 50px;
+    color: #bdc3c7;
+    font-style: italic;
+}
