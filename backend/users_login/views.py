@@ -24,7 +24,7 @@ def login(request):
     serializer = LoginSerializer(data=request.data)
     if serializer.is_valid():
         user = authenticate( # authenticate ищет юзера в базе по student_id и password
-            student_id=serializer.validated_data['student_id'],
+            username=serializer.validated_data['student_id'],
             password=serializer.validated_data['password']
         )
         if user:
@@ -56,7 +56,7 @@ def logout(request):
 # Обработка запросов 
 class UserView(APIView):
     # IsAuthenticated — только залогиненные могут обращаться
-    permission = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]
 
     def get(self,request):
         serializer = UserSerializer(request.user)
