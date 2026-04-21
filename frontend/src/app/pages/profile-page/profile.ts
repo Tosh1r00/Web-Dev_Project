@@ -61,4 +61,24 @@ export class ProfilePage implements OnInit {
     logout(){
         this.auth.logout();
     }
+
+
+
+    //Method for Review
+    reviewText: string = '';
+    reviewRating: number = 5;
+    selectedMovieId: number | null = null;
+
+    submitReview(movieId: number) {
+    if (!this.reviewText.trim()) return;
+    this.auth.addReview(movieId, this.reviewText, this.reviewRating).subscribe({
+        next: () => {
+            this.reviewText = '';
+            this.reviewRating = 5;
+            this.selectedMovieId = null;
+            this.loadProfile(); // обновляем страницу
+            },
+        error: () => { this.errorMessage = 'Не удалось отправить отзыв'; }
+        });
+    }
 }

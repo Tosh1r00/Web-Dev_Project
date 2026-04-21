@@ -61,4 +61,16 @@ export class AuthService {
 getBookings() {
   return this.http.get<any[]>('http://127.0.0.1:8000/api/auth/users/history/');
 }
+
+ //For review section:
+ //Получит отзыв
+ getMovieReview(){
+  return this.http.get<any[]>('http://127.0.0.1:8000/api/movies/${movieId}/reviews/')
+ }
+
+ addReview(movieId: number, text: string, rating: number) {
+  return this.http.post(
+    `http://127.0.0.1:8000/api/movies/${movieId}/reviews/`, { text, rating }
+  )
+  }
 }

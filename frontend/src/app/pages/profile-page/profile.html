@@ -32,5 +32,30 @@
                     </div>
                     </div>
                 }
+                @for (booking of Bookings; track booking.id) {
+                <div class="booking-card">
+                        <div class="booking-info">
+                        <h4>{{ booking.session?.movie?.title }}</h4>
+                        <p>Дата: {{ booking.session?.start_time | date:'dd.MM.yyyy HH:mm' }}</p>
+                        <p>Места: {{ booking.seats }}</p>
+                        </div>
+
+                        <!-- Форма отзыва -->
+                        <div class="review-form">
+                            <textarea [(ngModel)]="reviewText" name="reviewText" placeholder="Напиши отзыв..." rows="3"> </textarea>
+                        <select [(ngModel)]="reviewRating" name="reviewRating">
+                            <option [value]="5">★★★★★</option>
+                            <option [value]="4">★★★★</option>
+                            <option [value]="3">★★★</option>
+                            <option [value]="2">★★</option>
+                            <option [value]="1">★</option>
+                        </select>
+                        
+                        <button (click)="submitReview(booking.session?.movie?.id)">
+                            Отправить отзыв
+                        </button>
+                        </div>
+                </div>  
+                }
         }
     </div>
